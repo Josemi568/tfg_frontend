@@ -1,8 +1,15 @@
 import httpClient from './httpClient'
+<<<<<<< HEAD
 import { setToken, removeToken, setItem, removeItem } from '../utils/storage'
 
 const LOGIN_URL = '/login' // relative to httpClient.baseURL
 const REGISTER_URL = '/register' // relative to httpClient.baseURL
+=======
+import { setToken, removeToken } from '../utils/storage'
+
+const LOGIN_URL = '/api/login' // Replace with your actual login endpoint
+const REGISTER_URL = '/api/register' // Replace with your actual register endpoint
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
 
 export const login = async (username, password) => {
   try {
@@ -10,15 +17,23 @@ export const login = async (username, password) => {
     if (password !== undefined) payload.password = password
 
     const response = await httpClient.post(LOGIN_URL, payload)
+<<<<<<< HEAD
+=======
+    // assume server returns { token: '...' }
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
     const token = response?.data?.token || response?.data
 
     if (token) {
       setToken(token)
+<<<<<<< HEAD
       setItem('username', username)
+=======
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
     }
 
     return token
   } catch (error) {
+<<<<<<< HEAD
     console.error('[auth] login error', {
       username,
       message: error.message,
@@ -26,12 +41,19 @@ export const login = async (username, password) => {
       data: error.response?.data,
     })
     throw error
+=======
+    throw new Error('Login failed')
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
   }
 }
 
 export const register = async user => {
   try {
+<<<<<<< HEAD
     const response = await httpClient.post(REGISTER_URL, user)
+=======
+    const response = await httpClient.post("http://localhost:8000/api/register", user)
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
     const token = response?.data?.token || response?.data
 
     if (token) {
@@ -40,6 +62,7 @@ export const register = async user => {
 
     return token
   } catch (error) {
+<<<<<<< HEAD
     console.error('[auth] register error', {
       user: { username: user?.username },
       message: error.message,
@@ -64,6 +87,9 @@ export const register = async user => {
     }
 
     throw error
+=======
+    throw new Error('Register failed')
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
   }
 }
 
@@ -72,7 +98,10 @@ export const loginUser = login
 
 export const logout = () => {
   removeToken()
+<<<<<<< HEAD
   removeItem('username')
+=======
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
 }
 
 export default { login, loginUser, logout, register }

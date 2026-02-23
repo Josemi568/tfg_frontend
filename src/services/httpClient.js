@@ -1,7 +1,11 @@
 import axios from 'axios'
 
 const httpClient = axios.create({
+<<<<<<< HEAD
   baseURL: 'http://localhost:8000/api', // Local API base URL
+=======
+  baseURL: 'https://your-api-url.com/api', // Replace with your API base URL
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
   headers: {
     'Content-Type': 'application/json',
   },
@@ -10,6 +14,7 @@ const httpClient = axios.create({
 // Add a request interceptor to include the JWT in the headers
 httpClient.interceptors.request.use(
   config => {
+<<<<<<< HEAD
     const url = config.url || ''
     // Don't attach Authorization header for auth endpoints
     if (url.includes('/login') || url.includes('/register')) {
@@ -23,16 +28,21 @@ httpClient.interceptors.request.use(
       return config
     }
 
+=======
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
     const token = localStorage.getItem('jwt') // Assuming 'jwt' is the key used to store the token
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     }
+<<<<<<< HEAD
     // log non-auth requests for debugging (omit large bodies)
     console.debug('[httpClient] request', {
       method: config.method,
       url: config.url,
       headers: config.headers,
     })
+=======
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
     return config
   },
   error => {
@@ -40,6 +50,7 @@ httpClient.interceptors.request.use(
   }
 )
 
+<<<<<<< HEAD
 // Response interceptor: log errors for easier debugging
 httpClient.interceptors.response.use(
   response => response,
@@ -58,4 +69,6 @@ httpClient.interceptors.response.use(
   }
 )
 
+=======
+>>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
 export default httpClient
