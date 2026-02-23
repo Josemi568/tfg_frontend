@@ -1,5 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
 import { Link } from 'react-router-dom'
 import { getToken, getItem, removeToken, removeItem } from '../utils/storage'
 
@@ -32,14 +31,6 @@ const Dashboard = () => {
           </p>
         </>
       )}
-=======
-
-const Dashboard = () => {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome to your dashboard!</p>
->>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
     </div>
   )
 }

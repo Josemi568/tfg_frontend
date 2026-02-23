@@ -9,11 +9,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-<<<<<<< HEAD
         <Route path="/" element={<Dashboard />} />
-=======
-        <Route path="/" element={<Navigate to="/login" replace />} />
->>>>>>> b50d84c1fa41c3363ebb7235a2b40b4dde41bdf9
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
