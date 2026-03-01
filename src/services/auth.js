@@ -67,6 +67,36 @@ export const register = async user => {
   }
 }
 
+export const changeRole = async id => {
+  try {
+    const response = await httpClient.post(`/user/${id}/change-role`)
+    return response?.data
+  } catch (error) {
+    console.error('[auth] changeRole error', {
+      id,
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+    })
+    throw error
+  }
+}
+
+export const changeStatus = async id => {
+  try {
+    const response = await httpClient.post(`/user/${id}/change-status`)
+    return response?.data
+  } catch (error) {
+    console.error('[auth] changeStatus error', {
+      id,
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+    })
+    throw error
+  }
+}
+
 // alias used by hooks/useAuth.js
 export const loginUser = login
 
@@ -75,4 +105,4 @@ export const logout = () => {
   removeItem('username')
 }
 
-export default { login, loginUser, logout, register }
+export default { login, loginUser, logout, register, changeRole, changeStatus }

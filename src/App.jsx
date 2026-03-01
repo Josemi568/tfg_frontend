@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import UserList from './pages/UserList'
 import PrivateRoute from './components/PrivateRoute'
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/users" element={<PrivateRoute><UserList /></PrivateRoute>} />
       </Routes>
     </Router>
   )

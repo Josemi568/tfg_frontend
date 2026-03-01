@@ -66,3 +66,77 @@ button:hover {
     color: red;
     margin-top: 10px;
 }
+
+/* User list styles */
+.user-list {
+    max-width: 900px;
+    margin: 24px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.user-list h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.25rem;
+}
+
+.success-message {
+    padding: 10px 12px;
+    background: #e6ffed;
+    border: 1px solid #b7f0c3;
+    color: #0b6b2f;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.user-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.user-item:nth-child(odd) {
+    background: #fbfbfb;
+}
+
+.user-actions {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-secondary {
+    background: #007bff;
+    color: #fff;
+}
+
+.btn-secondary:hover { background: #0069d9 }
+
+.btn-danger {
+    background: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover { background: #c82333 }
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
