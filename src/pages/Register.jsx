@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { register as registerUser } from '../services/auth'
 
 const Register = () => {
@@ -56,6 +56,7 @@ const Register = () => {
         {success && <p className="success">{success}</p>}
 
         <button type="submit" className="btn-primary">Registrarse</button>
+        <p className="small"><Link to="/dashboard">volve al inicio</Link></p>
       </form>
     </div>
   )

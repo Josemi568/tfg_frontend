@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import httpClient from '../services/httpClient'
+import { Link } from 'react-router-dom'
 import { changeRole, changeStatus } from '../services/auth'
 
 const UserList = () => {
@@ -76,6 +77,7 @@ const UserList = () => {
   return (
     <div className="user-list container">
       <h2>Listado de usuarios</h2>
+      <p className="small"><Link to="/dashboard">volve al inicio</Link></p>
       {successMsg && <div className="success-message">{successMsg}</div>}
       {users.length === 0 ? (
         <p>No hay usuarios.</p>
