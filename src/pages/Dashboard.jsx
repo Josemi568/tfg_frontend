@@ -37,6 +37,9 @@ const Dashboard = () => {
           <p>Bienvenido{username ? `, ${username}` : ''} — este es tu dashboard.</p>
           <div>
             <button onClick={handleLogout}>Cerrar sesión</button>
+            <Link to="/crear-post">
+              <button style={{ marginLeft: '8px' }}>Crear publicación</button>
+            </Link>
             {isAdmin && (
               <Link to="/users">
                 <button style={{ marginLeft: '8px' }}>Gestionar usuarios</button>
