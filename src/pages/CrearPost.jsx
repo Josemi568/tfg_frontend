@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import httpClient from '../services/httpClient'
 import { getToken } from '../utils/storage'
+import { Link } from 'react-router-dom'
 
 const CrearPost = () => {
   const [title, setTitle] = useState('')
@@ -44,7 +45,7 @@ const CrearPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    
+
     const authorId = getUserIdFromToken()
     if (!authorId) {
       setError('No se pudo determinar el ID del usuario.')
@@ -58,7 +59,7 @@ const CrearPost = () => {
         img_video: fileBase64,
         author: authorId
       }
-      
+
       await httpClient.post('/post/api/new', payload)
       navigate('/dashboard')
     } catch (err) {
@@ -73,41 +74,42 @@ const CrearPost = () => {
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
         <div>
           <label htmlFor="title">Título:</label>
-          <input 
-            type="text" 
-            id="title" 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
-            required 
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
             style={{ width: '100%' }}
           />
         </div>
         <div>
           <label htmlFor="description">Descripción:</label>
-          <textarea 
-            id="description" 
-            value={description} 
-            onChange={(e) => setDescription(e.target.value)} 
-            required 
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
             rows="4"
             style={{ width: '100%' }}
           />
         </div>
         <div>
           <label htmlFor="file">Imagen o Video:</label>
-          <input 
-            type="file" 
-            id="file" 
+          <input
+            type="file"
+            id="file"
             accept="image/*,video/*"
-            onChange={handleFileChange} 
+            onChange={handleFileChange}
             style={{ width: '100%' }}
           />
         </div>
-        
+
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        
+
         <button type="submit" className="btn-primary">Crear</button>
       </form>
+      <p className="small"><Link to="/dashboard">volve al inicio</Link></p>
     </div>
   )
 }
