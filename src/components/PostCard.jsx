@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PostCard = ({ post }) => {
   const BACKEND_URL = 'http://localhost:8000';
@@ -29,56 +30,55 @@ const PostCard = ({ post }) => {
   const mediaSrc = getMediaSrc(post.img_video);
 
   return (
-    <div className="card post-card glass">
-      <h3 className="post-title">{post.title}</h3>
-      
-      <div className="post-media-container" style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: '12px', marginBottom: '16px', background: '#f1f5f9' }}>
-        {post.img_video ? (
-          isVideo(mediaSrc) ? (
-            <video 
-              src={mediaSrc} 
-              className="post-media" 
-              controls 
-              muted
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <img 
-              src={mediaSrc} 
-              alt={post.title} 
-              className="post-media" 
-              loading="lazy"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }}
-            />
-          )
-        ) : null}
+    <Link 
+      to={`/post/${post.id}`} 
+      state={{ post }}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    >
+      <div className="card post-card glass" style={{ height: '100%', cursor: 'pointer' }}>
+        <h3 className="post-title" style={{ transition: 'color 0.2s' }}>{post.title}</h3>
         
-        {/* Fallback shadow/placeholder if media fails or is missing */}
-        <div className="media-placeholder" style={{ 
-          display: post.img_video ? 'none' : 'flex', 
-          width: '100%', 
-          height: '100%', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
-          color: '#94a3b8',
-          fontSize: '0.875rem'
-        }}>
-          Sin media disponible
+        <div className="post-media-container" style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: '12px', marginBottom: '16px', background: '#f1f5f9' }}>
+          {post.img_video ? (
+            isVideo(mediaSrc) ? (
+              <video 
+                src={mediaSrc} 
+                className="post-media" 
+                muted
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            ) : (
+              <img 
+                src={mediaSrc} 
+                alt={post.title} 
+                className="post-media" 
+                loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            )
+          ) : null}
+          
+          <div className="media-placeholder" style={{ 
+            display: post.img_video ? 'none' : 'flex', 
+            width: '100%', 
+            height: '100%', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            color: '#94a3b8',
+            fontSize: '0.875rem'
+          }}>
+            Sin media disponible
+          </div>
+        </div>
+
+        <div className="post-meta" style={{ marginTop: 'auto' }}>
+          <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem' }}>
+            Publicado por <span className="post-author" style={{ fontWeight: 600, color: 'var(--primary-color)' }}>{post.author}</span>
+          </p>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{post.date}</span>
         </div>
       </div>
-
-      <div className="post-meta" style={{ marginTop: 'auto' }}>
-        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem' }}>
-          Publicado por <span className="post-author" style={{ fontWeight: 600, color: 'var(--primary-color)' }}>{post.author}</span>
-        </p>
-        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{post.date}</span>
-      </div>
-    </div>
+    </Link>
   );
 };
 
