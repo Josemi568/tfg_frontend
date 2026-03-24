@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import httpClient from '../services/httpClient';
+import { getToken } from '../utils/storage';
+import CommentList from '../components/CommentList';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -9,8 +11,112 @@ const PostDetail = () => {
   const [post, setPost] = useState(location.state?.post || null);
   const [loading, setLoading] = useState(!post);
   const [error, setError] = useState(null);
+  const [commentText, setCommentText] = useState('');
+  const [commentError, setCommentError] = useState('');
+  const [commentSuccess, setCommentSuccess] = useState('');
+  const [refreshComments, setRefreshComments] = useState(0);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [userAction, setUserAction] = useState('none');
 
   const BACKEND_URL = 'http://localhost:8000';
+
+  const getUserIdFromToken = () => {
+    try {
+      const token = getToken();
+      if (!token) return null;
+      const parts = token.split('.');
+      if (parts.length < 2) return null;
+      const payload = JSON.parse(atob(parts[1]));
+      return payload.id || payload.userId || payload.user_id || payload.sub || 1;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    setCommentError('');
+    setCommentSuccess('');
+    
+    if (!commentText.trim()) {
+      setCommentError('El comentario no puede estar vacío');
+      return;
+    }
+
+    const authorId = getUserIdFromToken();
+    if (!authorId) {
+      setCommentError('Debes iniciar sesión para comentar');
+      return;
+    }
+
+    try {
+      const payload = {
+        text: commentText,
+        author: authorId,
+        post: parseInt(id)
+      };
+      
+      await httpClient.post('/comment/api/new', payload);
+      setCommentSuccess('Comentario creado con éxito');
+      setCommentText('');
+      setRefreshComments(prev => prev + 1);
+    } catch (err) {
+      console.error('Error creating comment:', err);
+      setCommentError('Error al crear el comentario. Inténtalo de nuevo.');
+    }
+  };
+
+  const handleLikeDislike = async (action) => {
+    const authorId = getUserIdFromToken();
+    if (!authorId) {
+      return;
+    }
+
+    const previousStatus = userAction;
+    let newLikes = likes;
+    let newDislikes = dislikes;
+    let newAction = action;
+
+    if (action === 'like') {
+      if (previousStatus === 'dislike') {
+        newLikes += 1;
+        newDislikes = Math.max(0, newDislikes - 1);
+      } else if (previousStatus === 'none') {
+        newLikes += 1;
+      } else if (previousStatus === 'like') {
+        newLikes = Math.max(0, newLikes - 1);
+        newAction = 'none';
+      }
+    } else if (action === 'dislike') {
+      if (previousStatus === 'like') {
+        newDislikes += 1;
+        newLikes = Math.max(0, newLikes - 1);
+      } else if (previousStatus === 'none') {
+        newDislikes += 1;
+      } else if (previousStatus === 'dislike') {
+        newDislikes = Math.max(0, newDislikes - 1);
+        newAction = 'none';
+      }
+    }
+
+    setLikes(newLikes);
+    setDislikes(newDislikes);
+    setUserAction(newAction);
+
+    try {
+      const payload = {
+        action: action,
+        previous_status: previousStatus
+      };
+      await httpClient.post(`/post/api/like_dislike/${id}`, payload);
+    } catch (err) {
+      console.error('Error updating like/dislike:', err);
+      setLikes(likes);
+      setDislikes(dislikes);
+      setUserAction(previousStatus);
+    }
+  };
 
   useEffect(() => {
     if (!post) {
@@ -21,6 +127,9 @@ const PostDetail = () => {
           const foundPost = response.data.find(p => p.id.toString() === id);
           if (foundPost) {
             setPost(foundPost);
+            setLikes(foundPost.likes || 0);
+            setDislikes(foundPost.dislikes || 0);
+            setUserAction(foundPost.userAction || 'none');
           } else {
             setError('Publicación no encontrada.');
           }
@@ -32,6 +141,10 @@ const PostDetail = () => {
         }
       };
       fetchPost();
+    } else {
+      setLikes(post.likes || 0);
+      setDislikes(post.dislikes || 0);
+      setUserAction(post.userAction || 'none');
     }
   }, [id, post]);
 
@@ -91,13 +204,35 @@ const PostDetail = () => {
 
           <div style={{ display: 'flex', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <button disabled style={{ background: '#f1f5f9', color: '#1e293b', border: '1px solid var(--border-color)', padding: '8px 16px', borderRadius: '12px', cursor: 'default' }}>
-                👍 0
+              <button 
+                onClick={() => handleLikeDislike('like')}
+                style={{ 
+                  background: userAction === 'like' ? '#e2e8f0' : '#f1f5f9', 
+                  color: '#1e293b', 
+                  border: userAction === 'like' ? '2px solid #3b82f6' : '1px solid var(--border-color)', 
+                  padding: '8px 16px', 
+                  borderRadius: '12px', 
+                  cursor: 'pointer',
+                  fontWeight: userAction === 'like' ? 'bold' : 'normal',
+                  transition: 'all 0.2s ease'
+                }}>
+                👍 {likes}
               </button>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <button disabled style={{ background: '#f1f5f9', color: '#1e293b', border: '1px solid var(--border-color)', padding: '8px 16px', borderRadius: '12px', cursor: 'default' }}>
-                👎 0
+              <button 
+                onClick={() => handleLikeDislike('dislike')}
+                style={{ 
+                  background: userAction === 'dislike' ? '#e2e8f0' : '#f1f5f9', 
+                  color: '#1e293b', 
+                  border: userAction === 'dislike' ? '2px solid #ef4444' : '1px solid var(--border-color)', 
+                  padding: '8px 16px', 
+                  borderRadius: '12px', 
+                  cursor: 'pointer',
+                  fontWeight: userAction === 'dislike' ? 'bold' : 'normal',
+                  transition: 'all 0.2s ease'
+                }}>
+                👎 {dislikes}
               </button>
             </div>
           </div>
@@ -108,6 +243,32 @@ const PostDetail = () => {
             {post.description}
           </div>
         )}
+
+        {/* Comment Section */}
+        <hr style={{ margin: '40px 0', border: 'none', borderTop: '1px solid var(--border-color)' }} />
+        
+        <div style={{ marginTop: '20px' }}>
+          <h3 style={{ marginBottom: '16px', fontSize: '1.5rem', color: '#1e293b' }}>Comentarios</h3>
+          
+          <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <input 
+              type="text" 
+              placeholder="comenta algo bonito"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              style={{ flex: 1, padding: '16px', borderRadius: '12px', border: '1px solid var(--border-color)', outline: 'none', fontSize: '1rem' }}
+              required
+            />
+            <button type="submit" className="btn-primary" style={{ padding: '16px 32px', borderRadius: '12px', whiteSpace: 'nowrap', fontSize: '1rem', fontWeight: 600 }}>
+              Comentar
+            </button>
+          </form>
+          {commentError && <p style={{ color: 'red', marginTop: '12px', fontSize: '0.95rem' }}>{commentError}</p>}
+          {commentSuccess && <p style={{ color: 'green', marginTop: '12px', fontSize: '0.95rem' }}>{commentSuccess}</p>}
+
+          {/* List of comments */}
+          <CommentList postId={id} refreshTrigger={refreshComments} />
+        </div>
       </article>
     </div>
   );
