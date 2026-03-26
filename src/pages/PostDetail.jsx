@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import httpClient from '../services/httpClient';
-import { getToken } from '../utils/storage';
+import { getToken, isAdminUser } from '../utils/storage';
 import CommentList from '../components/CommentList';
 
 const PostDetail = () => {
@@ -20,6 +20,19 @@ const PostDetail = () => {
   const [userAction, setUserAction] = useState('none');
 
   const BACKEND_URL = 'http://localhost:8000';
+  const isAdmin = isAdminUser();
+
+  const handleBanToggle = async () => {
+    try {
+      const response = await httpClient.post(`/post/${id}/ban`);
+      if (response.data) {
+        setPost(prev => ({ ...prev, status: response.data.status }));
+      }
+    } catch (err) {
+      console.error('Error toggling ban status:', err);
+      alert('Error cambiando el estado de la publicación.');
+    }
+  };
 
   const getUserIdFromToken = () => {
     try {
@@ -180,7 +193,20 @@ const PostDetail = () => {
       </button>
 
       <article className="card glass" style={{ padding: '40px' }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '32px', lineHeight: '1.1' }}>{post.title}</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '3rem', margin: 0, lineHeight: '1.1', flex: 1 }}>
+            {post.title} {isAdmin && post.status === 1 && <span style={{ color: '#ef4444', fontSize: '0.5em', verticalAlign: 'middle', marginLeft: '12px' }}>(baneado)</span>}
+          </h1>
+          {isAdmin && (
+            <button 
+              onClick={handleBanToggle}
+              className={`btn ${post.status === 1 ? 'btn-secondary' : 'btn-danger'}`}
+              style={{ marginLeft: '24px', whiteSpace: 'nowrap' }}
+            >
+              {post.status === 1 ? 'Desbanear Publicación' : 'Banear Publicación'}
+            </button>
+          )}
+        </div>
         
         <div style={{ position: 'relative', width: '100%', marginBottom: '40px', borderRadius: '20px', overflow: 'hidden', background: '#f1f5f9', boxShadow: 'var(--shadow-lg)' }}>
           {post.img_video ? (

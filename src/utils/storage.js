@@ -22,4 +22,20 @@ export const removeItem = key => {
   localStorage.removeItem(key)
 }
 
-export default { setToken, getToken, removeToken, setItem, getItem, removeItem }
+export const isAdminUser = () => {
+  try {
+    const token = getToken()
+    if (!token) return false
+    const parts = token.split('.')
+    if (parts.length < 2) return false
+    const payload = JSON.parse(atob(parts[1]))
+    const roles = payload.roles || payload.authorities || payload.role || payload.rolesGranted || []
+    if (Array.isArray(roles)) return roles.includes('ROLE_ADMIN')
+    if (typeof roles === 'string') return roles === 'ROLE_ADMIN'
+    return false
+  } catch (e) {
+    return false
+  }
+}
+
+export default { setToken, getToken, removeToken, setItem, getItem, removeItem, isAdminUser }

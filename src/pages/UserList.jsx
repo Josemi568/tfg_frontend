@@ -94,7 +94,7 @@ const UserList = () => {
                   Cambiar rol
                 </button>
                 <button className="btn btn-danger" onClick={() => handleChangeStatus(u.id || u._id, u.username || u.name)} aria-label={`Cambiar estado ${u.username || u.name}`}>
-                  Banear
+                  Cambiar estado
                 </button>
               </div>
             </li>

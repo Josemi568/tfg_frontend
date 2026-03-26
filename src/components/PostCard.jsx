@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { isAdminUser } from '../utils/storage';
 
 const PostCard = ({ post }) => {
   const BACKEND_URL = 'http://localhost:8000';
+  const isAdmin = isAdminUser();
 
   const getMediaSrc = (src) => {
     if (!src) return '';
@@ -36,7 +38,9 @@ const PostCard = ({ post }) => {
       style={{ textDecoration: 'none', color: 'inherit' }}
     >
       <div className="card post-card glass" style={{ height: '100%', cursor: 'pointer' }}>
-        <h3 className="post-title" style={{ transition: 'color 0.2s' }}>{post.title}</h3>
+        <h3 className="post-title" style={{ transition: 'color 0.2s' }}>
+          {post.title} {isAdmin && post.status === 1 && <span style={{ color: '#ef4444', fontSize: '0.9em' }}>(baneado)</span>}
+        </h3>
         
         <div className="post-media-container" style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: '12px', marginBottom: '16px', background: '#f1f5f9' }}>
           {post.img_video ? (

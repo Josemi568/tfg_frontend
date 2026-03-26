@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import httpClient from '../services/httpClient';
+import { isAdminUser } from '../utils/storage';
 import PostCard from './PostCard';
 
 const PostList = () => {
@@ -12,7 +13,9 @@ const PostList = () => {
       try {
         // Using the full path as specified by the user
         const response = await httpClient.get('/post/api/all');
-        setPosts(response.data);
+        const adminStatus = isAdminUser();
+        const availablePosts = response.data.filter(post => adminStatus || post.status !== 1);
+        setPosts(availablePosts);
         setLoading(false);
       } catch (err) {
         console.error('Error fetching posts:', err);
