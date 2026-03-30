@@ -3,6 +3,11 @@ import httpClient from '../services/httpClient'
 import { Link } from 'react-router-dom'
 import { changeRole, changeStatus } from '../services/auth'
 
+/**
+ * Página que muestra la lista de usuarios (solo para administradores).
+ * 
+ * Permite a los administradores ver y gestionar los usuarios del sistema.
+ */
 const UserList = () => {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
@@ -14,7 +19,6 @@ const UserList = () => {
       try {
         setLoading(true)
         const resp = await httpClient.get('/users')
-        // Expecting an array in resp.data
         setUsers(Array.isArray(resp.data) ? resp.data : [])
       } catch (err) {
         setError(err)
@@ -44,7 +48,7 @@ const UserList = () => {
       const resp = await httpClient.get('/users')
       setUsers(Array.isArray(resp.data) ? resp.data : [])
 
-      // Try to determine the new status from different possible response shapes
+      // intenta obtener el nuevo estado de diferentes formas
       let newStatus = null
       if (result !== undefined && result !== null) {
         if (typeof result === 'number' || typeof result === 'string') {

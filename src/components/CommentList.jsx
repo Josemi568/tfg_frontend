@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import httpClient from '../services/httpClient';
 import { isAdminUser } from '../utils/storage';
 
+/**
+ * Componente que recibe la información de la base de datos
+ * y muestra una lista de comentarios.
+ */
 const CommentList = ({ postId, refreshTrigger }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +40,7 @@ const CommentList = ({ postId, refreshTrigger }) => {
     try {
       const response = await httpClient.post(`/comment/${commentId}/ban`);
       if (response.data) {
-        setComments(prevComments => prevComments.map(c => 
+        setComments(prevComments => prevComments.map(c =>
           c.id === commentId ? { ...c, status: response.data.status } : c
         ));
       }
@@ -67,7 +71,7 @@ const CommentList = ({ postId, refreshTrigger }) => {
                 <div style={{ color: '#334155', lineHeight: '1.5' }}>{comment.text}</div>
               </div>
               {isAdmin && (
-                <button 
+                <button
                   onClick={() => handleBanToggle(comment.id)}
                   className={`btn ${comment.status === 1 ? 'btn-secondary' : 'btn-danger'}`}
                   style={{ padding: '6px 12px', fontSize: '0.85rem', whiteSpace: 'nowrap', marginLeft: '16px' }}

@@ -3,6 +3,10 @@ import httpClient from '../services/httpClient';
 import { isAdminUser } from '../utils/storage';
 import PostCard from './PostCard';
 
+/**
+ * Componente que recibe la información de la base de datos
+ * y muestra una lista de publicaciones.
+ */
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +15,6 @@ const PostList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Using the full path as specified by the user
         const response = await httpClient.get('/post/api/all');
         const adminStatus = isAdminUser();
         const availablePosts = response.data.filter(post => adminStatus || post.status !== 1);

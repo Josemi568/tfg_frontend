@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { register as registerUser } from '../services/auth'
 
+/**
+ * Página que permite al usaurio registrarse en la pagina web.
+ */
 const Register = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

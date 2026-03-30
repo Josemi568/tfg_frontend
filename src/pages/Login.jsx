@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../services/auth'
 
+/**
+ * Página que permite al usuario iniciar sesión.
+ */
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

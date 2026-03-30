@@ -4,6 +4,9 @@ import httpClient from '../services/httpClient'
 import { getToken } from '../utils/storage'
 import { Link } from 'react-router-dom'
 
+/**
+ * Página que permite al usuario crear una nueva publicación.
+ */
 const CrearPost = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -24,8 +27,7 @@ const CrearPost = () => {
       const parts = token.split('.')
       if (parts.length < 2) return null
       const payload = JSON.parse(atob(parts[1]))
-      // Depending on JWT configuration, ID might be stored in 'id', 'userId', or 'sub'
-      return payload.id || payload.userId || payload.user_id || payload.sub || 1 // fallback if not found
+      return payload.id || payload.userId || payload.user_id || payload.sub || 1
     } catch (e) {
       return null
     }

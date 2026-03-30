@@ -4,6 +4,12 @@ import httpClient from '../services/httpClient';
 import { getToken, isAdminUser } from '../utils/storage';
 import CommentList from '../components/CommentList';
 
+/**
+ * Página que muestra los detalles de una publicación.
+ * 
+ * Ademas permite al usuario interactuar con la publicación
+ * (dar like, dislike y comentar).
+ */
 const PostDetail = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -51,7 +57,7 @@ const PostDetail = () => {
     e.preventDefault();
     setCommentError('');
     setCommentSuccess('');
-    
+
     if (!commentText.trim()) {
       setCommentError('El comentario no puede estar vacío');
       return;
@@ -69,7 +75,7 @@ const PostDetail = () => {
         author: authorId,
         post: parseInt(id)
       };
-      
+
       await httpClient.post('/comment/api/new', payload);
       setCommentSuccess('Comentario creado con éxito');
       setCommentText('');
@@ -135,7 +141,6 @@ const PostDetail = () => {
     if (!post) {
       const fetchPost = async () => {
         try {
-          // Fallback: fetch all and find the one we need if no single endpoint exists
           const response = await httpClient.get('http://localhost:8000/post/api/allPosts');
           const foundPost = response.data.find(p => p.id.toString() === id);
           if (foundPost) {
@@ -185,8 +190,8 @@ const PostDetail = () => {
 
   return (
     <div className="container" style={{ maxWidth: '900px' }}>
-      <button 
-        onClick={() => navigate(-1)} 
+      <button
+        onClick={() => navigate(-1)}
         style={{ marginBottom: '24px', background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}
       >
         &larr; Volver
@@ -198,7 +203,7 @@ const PostDetail = () => {
             {post.title} {isAdmin && post.status === 1 && <span style={{ color: '#ef4444', fontSize: '0.5em', verticalAlign: 'middle', marginLeft: '12px' }}>(baneado)</span>}
           </h1>
           {isAdmin && (
-            <button 
+            <button
               onClick={handleBanToggle}
               className={`btn ${post.status === 1 ? 'btn-secondary' : 'btn-danger'}`}
               style={{ marginLeft: '24px', whiteSpace: 'nowrap' }}
@@ -207,7 +212,7 @@ const PostDetail = () => {
             </button>
           )}
         </div>
-        
+
         <div style={{ position: 'relative', width: '100%', marginBottom: '40px', borderRadius: '20px', overflow: 'hidden', background: '#f1f5f9', boxShadow: 'var(--shadow-lg)' }}>
           {post.img_video ? (
             isVideo(mediaSrc) ? (
@@ -230,14 +235,14 @@ const PostDetail = () => {
 
           <div style={{ display: 'flex', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <button 
+              <button
                 onClick={() => handleLikeDislike('like')}
-                style={{ 
-                  background: userAction === 'like' ? '#e2e8f0' : '#f1f5f9', 
-                  color: '#1e293b', 
-                  border: userAction === 'like' ? '2px solid #3b82f6' : '1px solid var(--border-color)', 
-                  padding: '8px 16px', 
-                  borderRadius: '12px', 
+                style={{
+                  background: userAction === 'like' ? '#e2e8f0' : '#f1f5f9',
+                  color: '#1e293b',
+                  border: userAction === 'like' ? '2px solid #3b82f6' : '1px solid var(--border-color)',
+                  padding: '8px 16px',
+                  borderRadius: '12px',
                   cursor: 'pointer',
                   fontWeight: userAction === 'like' ? 'bold' : 'normal',
                   transition: 'all 0.2s ease'
@@ -246,14 +251,14 @@ const PostDetail = () => {
               </button>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <button 
+              <button
                 onClick={() => handleLikeDislike('dislike')}
-                style={{ 
-                  background: userAction === 'dislike' ? '#e2e8f0' : '#f1f5f9', 
-                  color: '#1e293b', 
-                  border: userAction === 'dislike' ? '2px solid #ef4444' : '1px solid var(--border-color)', 
-                  padding: '8px 16px', 
-                  borderRadius: '12px', 
+                style={{
+                  background: userAction === 'dislike' ? '#e2e8f0' : '#f1f5f9',
+                  color: '#1e293b',
+                  border: userAction === 'dislike' ? '2px solid #ef4444' : '1px solid var(--border-color)',
+                  padding: '8px 16px',
+                  borderRadius: '12px',
                   cursor: 'pointer',
                   fontWeight: userAction === 'dislike' ? 'bold' : 'normal',
                   transition: 'all 0.2s ease'
@@ -270,15 +275,15 @@ const PostDetail = () => {
           </div>
         )}
 
-        {/* Comment Section */}
+        {/* Sección de comentarios */}
         <hr style={{ margin: '40px 0', border: 'none', borderTop: '1px solid var(--border-color)' }} />
-        
+
         <div style={{ marginTop: '20px' }}>
           <h3 style={{ marginBottom: '16px', fontSize: '1.5rem', color: '#1e293b' }}>Comentarios</h3>
-          
+
           <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder="comenta algo bonito"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
@@ -292,7 +297,7 @@ const PostDetail = () => {
           {commentError && <p style={{ color: 'red', marginTop: '12px', fontSize: '0.95rem' }}>{commentError}</p>}
           {commentSuccess && <p style={{ color: 'green', marginTop: '12px', fontSize: '0.95rem' }}>{commentSuccess}</p>}
 
-          {/* List of comments */}
+          {/* Lista de comentarios */}
           <CommentList postId={id} refreshTrigger={refreshComments} />
         </div>
       </article>
