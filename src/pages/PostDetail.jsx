@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
+
 import httpClient from '../services/httpClient';
 import { getToken, isAdminUser } from '../utils/storage';
 import CommentList from '../components/CommentList';
@@ -228,10 +229,20 @@ const PostDetail = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-color)', paddingTop: '24px' }}>
           <div>
             <p style={{ margin: 0, fontSize: '1.1rem' }}>
-              Publicado por <span className="post-author" style={{ fontWeight: 700 }}>{post.author}</span>
+              Publicado por{' '}
+              <Link 
+                to={`/profile/${post.author_id || post.author}`} 
+                style={{ fontWeight: 700, color: 'var(--primary-color)', textDecoration: 'none' }}
+                onMouseOver={(e) => e.currentTarget.style.textDecoration = 'underline'}
+                onMouseOut={(e) => e.currentTarget.style.textDecoration = 'none'}
+              >
+                {post.author}
+              </Link>
             </p>
             <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{post.date}</span>
           </div>
+
+
 
           <div style={{ display: 'flex', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

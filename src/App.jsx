@@ -7,6 +7,8 @@ import UserList from './pages/UserList'
 import PrivateRoute from './components/PrivateRoute'
 import CrearPost from './pages/CrearPost'
 import PostDetail from './pages/PostDetail'
+import UserProfile from './pages/UserProfile'
+
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path="/crear-post" element={<PrivateRoute><CrearPost /></PrivateRoute>} />
         <Route path="/post/:id" element={<PrivateRoute><PostDetail /></PrivateRoute>} />
         <Route path="/users" element={<PrivateRoute><UserList /></PrivateRoute>} />
+        <Route path="/profile/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
+
       </Routes>
     </Router>
   )
