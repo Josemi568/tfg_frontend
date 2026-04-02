@@ -8,11 +8,12 @@ import PrivateRoute from './components/PrivateRoute'
 import CrearPost from './pages/CrearPost'
 import PostDetail from './pages/PostDetail'
 import UserProfile from './pages/UserProfile'
-
+import Header from './components/Header'
 
 const App = () => {
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import httpClient from '../services/httpClient';
 import PostCard from '../components/PostCard';
+import { getToken } from '../utils/storage';
 
 /**
  * Página de perfil de usuario.
@@ -15,6 +16,62 @@ const UserProfile = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isFollowingLocal, setIsFollowingLocal] = useState(false);
+
+  const getUserIdFromToken = () => {
+    try {
+      const token = getToken();
+      if (!token) return null;
+      const parts = token.split('.');
+      if (parts.length < 2) return null;
+      const payload = JSON.parse(atob(parts[1]));
+      return payload.id || payload.userId || payload.user_id || payload.sub;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const handleFollow = async () => {
+    const followerId = getUserIdFromToken();
+    const followedId = user?.id;
+
+    if (!followerId) {
+      return;
+    }
+
+    const action = isFollowingLocal ? 'unfollow' : 'follow';
+
+    try {
+      await httpClient.post('/user/api/follow', { followerId, followedId, action });
+      
+      // Cambiamos el estado local del botón
+      setIsFollowingLocal(!isFollowingLocal);
+
+      // Actualizamos localmente para que se cambie el contador visualmente
+      setUser(prev => {
+        if (!prev) return prev;
+        
+        // Manejamos de forma segura si `followers` es un número o un array.
+        let currentFollowersCount = typeof prev.followers === 'number' 
+          ? prev.followers 
+          : (Array.isArray(prev.followers) ? prev.followers.length : 0);
+          
+        if (action === 'follow') {
+          currentFollowersCount++;
+        } else {
+          currentFollowersCount = Math.max(0, currentFollowersCount - 1);
+        }
+
+        return {
+          ...prev,
+          followers: currentFollowersCount
+        };
+      });
+      
+    } catch (err) {
+      console.error('Error al seguir/dejar de seguir al usuario:', err);
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -63,6 +120,10 @@ const UserProfile = () => {
   if (error) return <div className="container error" style={{ textAlign: 'center', padding: '100px' }}>{error}</div>;
   if (!user) return null;
 
+  const currentUserId = getUserIdFromToken();
+  // Nos aseguramos de comparar como Strings para no tener conflictos de tipos (ej: 1 !== "1")
+  const showFollowButton = currentUserId && String(currentUserId) !== String(user.id);
+
   return (
     <div className="container" style={{ maxWidth: '1000px' }}>
       <button
@@ -74,7 +135,7 @@ const UserProfile = () => {
 
       <div className="card glass" style={{ padding: '48px', marginBottom: '48px', border: 'none', background: 'rgba(255, 255, 255, 0.7)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '24px' }}>
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <h1 style={{
               fontSize: '3.5rem',
               margin: 0,
@@ -85,19 +146,56 @@ const UserProfile = () => {
             }}>
               {user.username}
             </h1>
+            {showFollowButton && (
+              <button 
+                onClick={handleFollow}
+                style={{ 
+                  padding: '10px 24px', 
+                  borderRadius: '24px', 
+                  border: isFollowingLocal ? '1px solid var(--border-color, #ccc)' : 'none', 
+                  background: isFollowingLocal ? 'transparent' : 'var(--primary-color, #6366f1)', 
+                  color: isFollowingLocal ? 'var(--text-color, #333)' : 'white', 
+                  fontWeight: 'bold', 
+                  cursor: 'pointer', 
+                  boxShadow: isFollowingLocal ? 'none' : 'var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05))',
+                  transition: 'all 0.2s',
+                  fontSize: '1rem'
+                }}
+                onMouseOver={(e) => {
+                  if (isFollowingLocal) {
+                    e.currentTarget.style.background = '#ffe5e5';
+                    e.currentTarget.style.color = '#ef4444';
+                    e.currentTarget.style.borderColor = '#ef4444';
+                  } else {
+                    e.currentTarget.style.background = '#4f46e5';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (isFollowingLocal) {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = 'var(--text-color, #333)';
+                    e.currentTarget.style.borderColor = 'var(--border-color, #ccc)';
+                  } else {
+                    e.currentTarget.style.background = 'var(--primary-color, #6366f1)';
+                  }
+                }}
+              >
+                {isFollowingLocal ? 'Dejar de seguir' : 'Seguir'}
+              </button>
+            )}
           </div>
 
           <div style={{ display: 'flex', gap: '40px', background: 'var(--surface-color)', padding: '20px 40px', borderRadius: '24px', boxShadow: 'var(--shadow-sm)' }}>
             <div style={{ textAlign: 'center' }}>
               <span style={{ display: 'block', fontSize: '1.75rem', fontWeight: 700, color: 'var(--primary-color)' }}>
-                {user.followers?.length || 0}
+                {typeof user.followers === 'number' ? user.followers : (user.followers?.length || 0)}
               </span>
               <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Seguidores</span>
             </div>
             <div style={{ width: '1px', background: 'var(--border-color)' }}></div>
             <div style={{ textAlign: 'center' }}>
               <span style={{ display: 'block', fontSize: '1.75rem', fontWeight: 700, color: 'var(--primary-color)' }}>
-                {user.follows?.length || 0}
+                {typeof user.follows === 'number' ? user.follows : (user.follows?.length || 0)}
               </span>
               <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Siguiendo</span>
             </div>

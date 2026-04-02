@@ -1,19 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getToken, getItem, removeToken, removeItem, isAdminUser } from '../utils/storage'
+import { getToken, getItem } from '../utils/storage'
 import PostList from '../components/PostList'
 
 const Dashboard = () => {
   const isAuthenticated = !!getToken()
   const username = getItem('username')
 
-  const isAdmin = isAdminUser()
 
-  const handleLogout = () => {
-    removeToken()
-    removeItem('username')
-    window.location.href = '/'
-  }
 
   return (
     /**
@@ -22,37 +16,6 @@ const Dashboard = () => {
      * Permite a los usuarios ver y gestionar las publicaciones.
      */
     <div className="container">
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-        <h1 style={{ margin: 0, fontSize: '2.5rem', background: 'linear-gradient(to right, #6366f1, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          Plazart
-        </h1>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          {isAuthenticated ? (
-            <>
-              {isAdmin && (
-                <Link to="/users">
-                  <button className="btn-secondary">Gestionar usuarios</button>
-                </Link>
-              )}
-              <button onClick={handleLogout} style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>
-                Salir
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">
-                <button style={{ background: 'transparent', color: 'var(--primary-color)', border: '1px solid var(--primary-color)' }}>
-                  Iniciar sesión
-                </button>
-              </Link>
-              <Link to="/register">
-                <button>Registrarse</button>
-              </Link>
-            </>
-          )}
-        </div>
-      </header>
-
       <main>
         {/**
          * Si el usuario está autenticado, muestra las publicaciones.
@@ -63,11 +26,11 @@ const Dashboard = () => {
           <>
             <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'flex-start' }}>
               <Link to="/crear-post" style={{ textDecoration: 'none' }}>
-                <button style={{ 
-                  padding: '16px 32px', 
-                  fontSize: '1.1rem', 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                <button style={{
+                  padding: '16px 32px',
+                  fontSize: '1.1rem',
+                  display: 'flex',
+                  alignItems: 'center',
                   gap: '10px',
                   boxShadow: '0 10px 15px -3px rgba(99, 102, 241, 0.3)',
                   background: 'linear-gradient(135deg, var(--primary-color), #818cf8)'
