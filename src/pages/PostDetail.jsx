@@ -139,33 +139,43 @@ const PostDetail = () => {
   };
 
   useEffect(() => {
-    if (!post) {
+    const postFromState = location.state?.post;
+
+    if (postFromState && postFromState.id.toString() === id) {
+      setPost(postFromState);
+      setLoading(false);
+      setError(null);
+    } else if (!post || post.id.toString() !== id) {
+      setLoading(true);
+      setError(null);
       const fetchPost = async () => {
         try {
           const response = await httpClient.get('http://localhost:8000/post/api/allPosts');
           const foundPost = response.data.find(p => p.id.toString() === id);
           if (foundPost) {
             setPost(foundPost);
-            setLikes(foundPost.likes || 0);
-            setDislikes(foundPost.dislikes || 0);
-            setUserAction(foundPost.userAction || 'none');
+            setError(null);
           } else {
             setError('Publicación no encontrada.');
           }
-          setLoading(false);
         } catch (err) {
           console.error('Error fetching post detail:', err);
           setError('No se pudo cargar la información de la publicación.');
+        } finally {
           setLoading(false);
         }
       };
       fetchPost();
-    } else {
+    }
+  }, [id, location.state]);
+
+  useEffect(() => {
+    if (post) {
       setLikes(post.likes || 0);
       setDislikes(post.dislikes || 0);
       setUserAction(post.userAction || 'none');
     }
-  }, [id, post]);
+  }, [post]);
 
   const getMediaSrc = (src) => {
     if (!src) return '';

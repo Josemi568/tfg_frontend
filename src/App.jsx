@@ -9,6 +9,7 @@ import CrearPost from './pages/CrearPost'
 import PostDetail from './pages/PostDetail'
 import UserProfile from './pages/UserProfile'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/profile/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
 
       </Routes>
+      <Footer />
     </Router>
   )
 }
