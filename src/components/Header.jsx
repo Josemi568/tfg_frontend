@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getToken, removeToken, removeItem, isAdminUser } from '../utils/storage';
 
@@ -10,23 +10,6 @@ const Header = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('user');
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const searchRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   const getUserIdFromToken = () => {
     try {
@@ -49,39 +32,11 @@ const Header = () => {
     window.location.href = '/';
   };
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    if (!searchQuery.trim()) {
-      setSearchResults([]);
-      setShowDropdown(false);
-      return;
-    }
-
-    setIsSearching(true);
-    setShowDropdown(true);
-
-    try {
-      const response = await fetch('http://localhost:8000/api/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ type: searchType, query: searchQuery.trim() })
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setSearchResults(data);
-      } else {
-        console.error('Search error:', data);
-        setSearchResults([]);
-      }
-    } catch (error) {
-      console.error('Search request failed', error);
-      setSearchResults([]);
-    } finally {
-      setIsSearching(false);
-    }
+    if (!searchQuery.trim()) return;
+    
+    navigate(`/search?type=${searchType}&query=${encodeURIComponent(searchQuery.trim())}`);
   };
 
   if (location.pathname === '/login' || location.pathname === '/register') {
@@ -98,7 +53,7 @@ const Header = () => {
         </h1>
 
         {/* Contenedor de Buscador */}
-        <div ref={searchRef} style={{ position: 'relative', flex: 1, maxWidth: '500px', margin: '0 20px' }}>
+        <div style={{ position: 'relative', flex: 1, maxWidth: '750px', margin: '0 30px' }}>
           <form onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%' }}>
             <select
               value={searchType}
@@ -119,78 +74,41 @@ const Header = () => {
               Buscar
             </button>
           </form>
-
-          {/* Cuadro de resultados del buscador */}
-          {showDropdown && (
-            <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '8px', marginTop: '8px', zIndex: 1000, maxHeight: '300px', overflowY: 'auto', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              {isSearching ? (
-                <div style={{ padding: '15px', textAlign: 'center', color: '#666' }}>Buscando...</div>
-              ) : searchResults.length > 0 ? (
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                  {searchResults.map(res => (
-                    <li key={res.id} style={{ borderBottom: '1px solid #eee' }}>
-                      {searchType === 'user' ? (
-                        <Link
-                          to={`/profile/${res.id}`}
-                          state={{ user: res }}
-                          style={{ display: 'block', padding: '12px 15px', textDecoration: 'none', color: '#333', cursor: 'pointer' }}
-                          onClick={() => { setShowDropdown(false); setSearchQuery(''); }}
-                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f9f9f9'}
-                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                        >
-                          <div style={{ fontWeight: '500' }}>{res.username}</div>
-                        </Link>
-                      ) : (
-                        <Link
-                          to={`/post/${res.id}`}
-                          state={{ post: res }}
-                          style={{ display: 'block', padding: '12px 15px', textDecoration: 'none', color: '#333', cursor: 'pointer' }}
-                          onClick={() => { setShowDropdown(false); setSearchQuery(''); }}
-                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f9f9f9'}
-                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                        >
-                          <div style={{ fontWeight: '500' }}>{res.title}</div>
-                          <div style={{ fontSize: '0.85em', color: '#666', marginTop: '4px' }}>por {res.author}</div>
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div style={{ padding: '15px', textAlign: 'center', color: '#666' }}>No se encontraron resultados para "{searchQuery}"</div>
-              )}
-            </div>
-          )}
         </div>
 
-        <div style={{ display: 'flex', gap: '12px', flexShrink: 0 }}>
+        <div style={{ display: 'flex', gap: '8px', flexShrink: 0, alignItems: 'center' }}>
+          <Link to={isAuthenticated ? "/contact" : "/login"}>
+            <button style={{ padding: '6px 14px', fontSize: '14px', background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>
+              Contacto
+            </button>
+          </Link>
           {isAuthenticated ? (
             <>
               {isAdmin && (
                 <Link to="/users">
-                  <button className="btn-secondary">Gestionar usuarios</button>
+                  <button className="btn-secondary" style={{ padding: '6px 14px', fontSize: '14px' }}>Gestionar usuarios</button>
                 </Link>
               )}
               {userId && (
                 <Link to={`/profile/${userId}`}>
-                  <button style={{ background: 'transparent', color: 'var(--primary-color)', border: '1px solid var(--primary-color)' }}>
+                  <button style={{ padding: '6px 14px', fontSize: '14px', background: 'transparent', color: 'var(--primary-color)', border: '1px solid var(--primary-color)' }}>
                     Ver Perfil
                   </button>
                 </Link>
               )}
-              <button onClick={handleLogout} style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>
+              <button onClick={handleLogout} style={{ padding: '6px 14px', fontSize: '14px', background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>
                 Salir
               </button>
             </>
           ) : (
             <>
               <Link to="/login">
-                <button style={{ background: 'transparent', color: 'var(--primary-color)', border: '1px solid var(--primary-color)' }}>
+                <button style={{ padding: '6px 14px', fontSize: '14px', background: 'transparent', color: 'var(--primary-color)', border: '1px solid var(--primary-color)' }}>
                   Iniciar sesión
                 </button>
               </Link>
               <Link to="/register">
-                <button>Registrarse</button>
+                <button style={{ padding: '6px 14px', fontSize: '14px' }}>Registrarse</button>
               </Link>
             </>
           )}

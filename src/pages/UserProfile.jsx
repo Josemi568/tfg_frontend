@@ -43,19 +43,19 @@ const UserProfile = () => {
 
     try {
       await httpClient.post('/user/api/follow', { followerId, followedId, action });
-      
+
       // Cambiamos el estado local del botón
       setIsFollowingLocal(!isFollowingLocal);
 
       // Actualizamos localmente para que se cambie el contador visualmente
       setUser(prev => {
         if (!prev) return prev;
-        
+
         // Manejamos de forma segura si `followers` es un número o un array.
-        let currentFollowersCount = typeof prev.followers === 'number' 
-          ? prev.followers 
+        let currentFollowersCount = typeof prev.followers === 'number'
+          ? prev.followers
           : (Array.isArray(prev.followers) ? prev.followers.length : 0);
-          
+
         if (action === 'follow') {
           currentFollowersCount++;
         } else {
@@ -67,7 +67,7 @@ const UserProfile = () => {
           followers: currentFollowersCount
         };
       });
-      
+
     } catch (err) {
       console.error('Error al seguir/dejar de seguir al usuario:', err);
     }
@@ -126,12 +126,12 @@ const UserProfile = () => {
 
   return (
     <div className="container" style={{ maxWidth: '1000px' }}>
-      <button
+      {/* <button
         onClick={() => navigate(-1)}
         style={{ marginBottom: '32px', background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer' }}
       >
         &larr; Volver
-      </button>
+      </button> */}
 
       <div className="card glass" style={{ padding: '48px', marginBottom: '48px', border: 'none', background: 'rgba(255, 255, 255, 0.7)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '24px' }}>
@@ -147,16 +147,16 @@ const UserProfile = () => {
               {user.username}
             </h1>
             {showFollowButton && (
-              <button 
+              <button
                 onClick={handleFollow}
-                style={{ 
-                  padding: '10px 24px', 
-                  borderRadius: '24px', 
-                  border: isFollowingLocal ? '1px solid var(--border-color, #ccc)' : 'none', 
-                  background: isFollowingLocal ? 'transparent' : 'var(--primary-color, #6366f1)', 
-                  color: isFollowingLocal ? 'var(--text-color, #333)' : 'white', 
-                  fontWeight: 'bold', 
-                  cursor: 'pointer', 
+                style={{
+                  padding: '10px 24px',
+                  borderRadius: '24px',
+                  border: isFollowingLocal ? '1px solid var(--border-color, #ccc)' : 'none',
+                  background: isFollowingLocal ? 'transparent' : 'var(--primary-color, #6366f1)',
+                  color: isFollowingLocal ? 'var(--text-color, #333)' : 'white',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
                   boxShadow: isFollowingLocal ? 'none' : 'var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05))',
                   transition: 'all 0.2s',
                   fontSize: '1rem'

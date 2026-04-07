@@ -8,6 +8,8 @@ import PrivateRoute from './components/PrivateRoute'
 import CrearPost from './pages/CrearPost'
 import PostDetail from './pages/PostDetail'
 import UserProfile from './pages/UserProfile'
+import SearchResults from './pages/SearchResults'
+import ContactUs from './pages/ContactUs'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -24,7 +26,8 @@ const App = () => {
         <Route path="/post/:id" element={<PrivateRoute><PostDetail /></PrivateRoute>} />
         <Route path="/users" element={<PrivateRoute><UserList /></PrivateRoute>} />
         <Route path="/profile/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
-
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/contact" element={<PrivateRoute><ContactUs /></PrivateRoute>} />
       </Routes>
       <Footer />
     </Router>

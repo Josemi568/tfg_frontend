@@ -201,12 +201,12 @@ const PostDetail = () => {
 
   return (
     <div className="container" style={{ maxWidth: '900px' }}>
-      <button
+      {/* <button
         onClick={() => navigate(-1)}
         style={{ marginBottom: '24px', background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}
       >
         &larr; Volver
-      </button>
+      </button> */}
 
       <article className="card glass" style={{ padding: '40px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
@@ -240,8 +240,8 @@ const PostDetail = () => {
           <div>
             <p style={{ margin: 0, fontSize: '1.1rem' }}>
               Publicado por{' '}
-              <Link 
-                to={`/profile/${post.author_id || post.author}`} 
+              <Link
+                to={`/profile/${post.author_id || post.author}`}
                 style={{ fontWeight: 700, color: 'var(--primary-color)', textDecoration: 'none' }}
                 onMouseOver={(e) => e.currentTarget.style.textDecoration = 'underline'}
                 onMouseOut={(e) => e.currentTarget.style.textDecoration = 'none'}
