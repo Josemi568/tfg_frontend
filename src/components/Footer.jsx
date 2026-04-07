@@ -16,8 +16,8 @@ const Footer = () => {
           {/* Lado izquierdo: Información */}
           <div style={{ flex: 1, textAlign: 'left', minWidth: '250px' }}>
             <p style={{ margin: '5px 0' }}>Aviso legal</p>
-            <p><a href="#" target="_blank" rel="noopener noreferrer" style={{ margin: '5px 0' }}>Politica de privacidad</a></p>
-            <p><a href="#" target="_blank" rel="noopener noreferrer" style={{ margin: '5px 0' }}>Politica de cookies</a></p>
+            <p><a href="#" rel="noopener noreferrer" style={{ margin: '5px 0' }}>Politica de privacidad</a></p>
+            <p><a href="#" rel="noopener noreferrer" style={{ margin: '5px 0' }}>Politica de cookies</a></p>
           </div>
 
           <div style={{ flex: 1, textAlign: 'center', minWidth: '250px' }}>
@@ -26,10 +26,10 @@ const Footer = () => {
 
           {/* Lado derecho: Imágenes */}
           <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: '20px', minWidth: '250px' }}>
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a href="#" rel="noopener noreferrer">
               <img src="/Images/telefono.png" alt="Telefono" style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '8px', backgroundColor: '#ffffff' }} />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a href="#" rel="noopener noreferrer">
               <img src="/Images/correo.png" alt="Correo" style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '8px', backgroundColor: '#ffffff' }} />
             </a>
           </div>
