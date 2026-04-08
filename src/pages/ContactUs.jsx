@@ -8,13 +8,17 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Mensaje enviado correctamente');
+    const subject = encodeURIComponent(`Contacto Plazart - ${reason}`);
+    const body = encodeURIComponent(message);
+    window.location.href = `mailto:plazartcontact387@gmail.com?subject=${subject}&body=${body}`;
     navigate('/');
   };
 
   return (
     <div className="container" style={{ maxWidth: '600px', marginTop: '40px', minHeight: '60vh' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Ponte en contacto con nosotros</h2>
+      <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>Ponte en contacto con nosotros</h1>
+      <p>Aqui en Plazart nos preocupamos por la integridad de nuestra plataforma y nuestros usuarios, por
+        lo que si quieres avisarnos de algo por favor cuentanoslo aqui abajo:</p>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div>
           <label style={{ display: 'block', marginBottom: '8px' }}>Motivo de contacto:</label>

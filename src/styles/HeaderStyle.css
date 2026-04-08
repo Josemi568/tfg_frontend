@@ -1,0 +1,186 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: rgba(33, 115, 182, 0.568);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  margin: 0;
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #6366f1, #a855f7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  flex-shrink: 0;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.buscador-container {
+  position: relative;
+  flex: 1;
+  max-width: 750px;
+  margin: 0 30px;
+}
+
+.formulario-busqueda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.buscador-select {
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--border-color);
+  background: white;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+.buscador-select option {
+  color: #000;
+}
+
+.buscador-escrito {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--border-color);
+  background: white;
+  color: #1e293b;
+}
+
+.buscador-boton {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.buscador-boton:hover {
+  background-color: rebeccapurple;
+}
+
+.botones-header {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.botones-header button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.boton-contacto,
+.boton-salir,
+.boton-gestionar-usuarios {
+  background: white;
+  color: var(--text-muted);
+  border-color: var(--border-color) !important;
+}
+
+.boton-perfil,
+.boton-iniciar-sesion {
+  background: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color) !important;
+}
+
+.boton-registrarse {
+  background: var(--primary-color);
+  color: white;
+}
+
+.botones-header button:hover {
+  transform: translateY(-1px);
+  box-shadow: rebeccapurple;
+}
+
+/* Responsividad */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .buscador-container {
+    margin: 0 15px;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+}
+
+/* Tablets pequeñas y móviles apaisados */
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .logo {
+    width: 100%;
+    text-align: center;
+  }
+
+  .buscador-container {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .botones-header {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  .formulario-busqueda {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buscador-select,
+  .buscador-escrito,
+  .buscador-boton {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .botones-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .botones-header button {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+}
