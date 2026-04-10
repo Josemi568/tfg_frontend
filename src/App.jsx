@@ -16,20 +16,24 @@ import Footer from './components/Footer'
 const App = () => {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/crear-post" element={<PrivateRoute><CrearPost /></PrivateRoute>} />
-        <Route path="/post/:id" element={<PrivateRoute><PostDetail /></PrivateRoute>} />
-        <Route path="/users" element={<PrivateRoute><UserList /></PrivateRoute>} />
-        <Route path="/profile/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
-        <Route path="/search" element={<SearchResults />} />
-        <Route path="/contact" element={<PrivateRoute><ContactUs /></PrivateRoute>} />
-      </Routes>
-      <Footer />
+      <div className="d-flex flex-column min-vh-100">
+        <Header />
+        <main className="flex-grow-1">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/crear-post" element={<PrivateRoute><CrearPost /></PrivateRoute>} />
+            <Route path="/post/:id" element={<PrivateRoute><PostDetail /></PrivateRoute>} />
+            <Route path="/users" element={<PrivateRoute><UserList /></PrivateRoute>} />
+            <Route path="/profile/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
+            <Route path="/search" element={<SearchResults />} />
+            <Route path="/contact" element={<PrivateRoute><ContactUs /></PrivateRoute>} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   )
 }
