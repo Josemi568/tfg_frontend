@@ -43,39 +43,4 @@
     height: 44px;
     object-fit: contain;
 }
-
-/* Responsividad */
-
-/* Tablets pequeñas y móviles apaisados */
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .footer-info,
-    .footer-copyright {
-        text-align: center;
-        flex: none;
-        width: 100%;
-    }
-
-    .footer-icons {
-        justify-content: center;
-        flex: none;
-        width: 100%;
-    }
-}
-
-/* Móviles */
-@media (max-width: 480px) {
-    .footer {
-        padding: 15px 10px;
-        margin-top: 60px;
-    }
-
-    .footer-icons img {
-        width: 36px;
-        height: 36px;
-    }
-}
+

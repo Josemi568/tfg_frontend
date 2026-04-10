@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getToken, removeToken, removeItem, isAdminUser } from '../utils/storage';
+import { Navbar, Container, Form, Button, Nav } from 'react-bootstrap';
 import '../styles/HeaderStyle.css';
 
 const Header = () => {
@@ -45,75 +46,78 @@ const Header = () => {
   }
 
   return (
-    <header className="header">
-      <h1 className="logo">
-        <Link to="/" className="logo-link">
+    <Navbar expand="lg" className="header mb-4 py-2">
+      <Container fluid className="d-flex align-items-center justify-content-between px-3">
+        <Navbar.Brand as={Link} to="/" className="logo m-0 flex-shrink-0 fs-1 fw-bolder">
           Plazart
-        </Link>
-      </h1>
+        </Navbar.Brand>
 
-      {/* Contenedor de Buscador */}
-      <div className="buscador-container">
-        <form onSubmit={handleSearch} className="formulario-busqueda">
-          <select
-            value={searchType}
-            onChange={(e) => setSearchType(e.target.value)}
-            className="buscador-select"
-          >
-            <option value="user">Usuarios</option>
-            <option value="post">Publicaciones</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Buscar..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="buscador-escrito"
-          />
-          <button type="submit" className="buscador-boton">
-            Buscar
-          </button>
-        </form>
-      </div>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-between w-100">
+          {/* Contenedor de Buscador */}
+          <div className="buscador-container mx-auto mx-lg-4 px-2 px-lg-0 my-4 my-lg-0 w-100">
+            <Form onSubmit={handleSearch} className="formulario-busqueda d-flex flex-wrap flex-lg-nowrap w-100 gap-2">
+              <Form.Select
+                value={searchType}
+                onChange={(e) => setSearchType(e.target.value)}
+                className="buscador-select w-auto"
+              >
+                <option value="user">Usuarios</option>
+                <option value="post">Publicaciones</option>
+              </Form.Select>
+              <Form.Control
+                type="text"
+                placeholder="Buscar..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="buscador-escrito flex-grow-1"
+              />
+              <Button type="submit" className="buscador-boton shadow-sm border-0">
+                Buscar
+              </Button>
+            </Form>
+          </div>
 
-      <div className="botones-header">
-        <Link to={isAuthenticated ? "/contact" : "/login"}>
-          <button className="boton-contacto">
-            Contacto
-          </button>
-        </Link>
-        {isAuthenticated ? (
-          <>
-            {isAdmin && (
-              <Link to="/users">
-                <button className="boton-gestionar-usuarios">Gestionar usuarios</button>
-              </Link>
-            )}
-            {userId && (
-              <Link to={`/profile/${userId}`}>
-                <button className="boton-perfil">
-                  Ver Perfil
-                </button>
-              </Link>
-            )}
-            <button onClick={handleLogout} className="boton-salir">
-              Salir
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">
-              <button className="boton-iniciar-sesion">
-                Iniciar sesión
-              </button>
+          <Nav className="botones-header d-flex flex-row flex-wrap justify-content-center align-items-center gap-2 mt-2 mt-lg-0">
+            <Link to={isAuthenticated ? "/contact" : "/login"}>
+              <Button variant="light" className="boton-contacto shadow-sm">
+                Contacto
+              </Button>
             </Link>
-            <Link to="/register">
-              <button className="boton-registrarse">Registrarse</button>
-            </Link>
-          </>
-        )}
-      </div>
-    </header>
+            {isAuthenticated ? (
+              <>
+                {isAdmin && (
+                  <Link to="/users">
+                    <Button variant="light" className="boton-gestionar-usuarios shadow-sm">Gestionar usuarios</Button>
+                  </Link>
+                )}
+                {userId && (
+                  <Link to={`/profile/${userId}`}>
+                    <Button variant="light" className="boton-perfil shadow-sm">
+                      Ver Perfil
+                    </Button>
+                  </Link>
+                )}
+                <Button variant="light" onClick={handleLogout} className="boton-salir shadow-sm">
+                  Salir
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="light" className="boton-iniciar-sesion shadow-sm">
+                    Iniciar sesión
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button className="boton-registrarse text-white shadow-sm border-0">Registrarse</Button>
+                </Link>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
