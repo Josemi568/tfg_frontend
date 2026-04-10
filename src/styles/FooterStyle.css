@@ -1,7 +1,17 @@
 .footer {
-    background-color: #ffffff;
-    margin-top: 40px;
+    background-color: #381394;
+    color: #ffffff;
+    margin-top: 115px;
     padding: 20px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
 }
 
 .footer-container {
@@ -26,4 +36,46 @@
     display: flex;
     justify-content: flex-end;
     gap: 20px;
+}
+
+.footer-icons img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+/* Responsividad */
+
+/* Tablets pequeñas y móviles apaisados */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-info,
+    .footer-copyright {
+        text-align: center;
+        flex: none;
+        width: 100%;
+    }
+
+    .footer-icons {
+        justify-content: center;
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .footer {
+        padding: 15px 10px;
+        margin-top: 60px;
+    }
+
+    .footer-icons img {
+        width: 36px;
+        height: 36px;
+    }
 }
