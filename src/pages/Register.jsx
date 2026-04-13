@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { register as registerUser } from '../services/auth'
+import '../styles/RegisterStyle.css'
 
 /**
  * Página que permite al usaurio registrarse en la pagina web.
@@ -27,11 +28,11 @@ const Register = () => {
   }
 
   return (
-    <div className="container register-wrapper">
-      <form className="register-form" onSubmit={handleRegister}>
-        <h2 className="register-header">Registro</h2>
+    <div className="container envoltorio-registro">
+      <form className="formulario-registro" onSubmit={handleRegister}>
+        <h2 className="cabecera-registro">Registro</h2>
 
-        <div className="form-group">
+        <div className="grupo-formulario">
           <label htmlFor="username">Usuario</label>
           <input
             type="text"
@@ -43,7 +44,7 @@ const Register = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="grupo-formulario">
           <label htmlFor="password">Contraseña</label>
           <input
             type="password"
@@ -55,11 +56,11 @@ const Register = () => {
           />
         </div>
 
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+        {error && <p className="error-registro">{error}</p>}
+        {success && <p className="exito-registro">{success}</p>}
 
-        <button type="submit" className="btn-primary">Registrarse</button>
-        <p className="small"><Link to="/dashboard">volve al inicio</Link></p>
+        <button type="submit" className="boton-primario">Registrarse</button>
+        <p className="texto-pequeno"><Link to="/dashboard">volve al inicio</Link></p>
       </form>
     </div>
   )

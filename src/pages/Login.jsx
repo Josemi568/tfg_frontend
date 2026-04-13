@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../services/auth'
+import '../styles/LoginStyle.css'
+
 
 /**
  * Página que permite al usuario iniciar sesión.
@@ -24,11 +26,11 @@ const Login = () => {
   }
 
   return (
-    <div className="container login-wrapper">
-      <form className="login-form" onSubmit={handleLogin}>
-        <h2 className="login-header">Iniciar sesión</h2>
+    <div className="container envoltorio-login">
+      <form className="formulario-login" onSubmit={handleLogin}>
+        <h2 className="cabecera-login">Iniciar sesión</h2>
 
-        <div className="form-group">
+        <div className="grupo-formulario">
           <label htmlFor="username">Usuario</label>
           <input
             type="text"
@@ -40,7 +42,7 @@ const Login = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="grupo-formulario">
           <label htmlFor="password">Contraseña</label>
           <input
             type="password"
@@ -52,11 +54,11 @@ const Login = () => {
           />
         </div>
 
-        {error && <p className="error">{error}</p>}
+        {error && <p className="error-login">{error}</p>}
 
-        <button type="submit" className="btn-primary">Entrar</button>
-        <p className="small">¿No tienes cuenta? <Link to="/register">Regístrate</Link></p>
-        <p className="small"><Link to="/dashboard">volve al inicio</Link></p>
+        <button type="submit" className="boton-entrar">Entrar</button>
+        <p className="texto-pequeno">¿No tienes cuenta? <Link to="/register">Regístrate</Link></p>
+        <p className="texto-pequeno"><Link to="/dashboard">volve al inicio</Link></p>
       </form>
     </div>
   )

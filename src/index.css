@@ -3,7 +3,7 @@
 :root {
     --primary-color: #6366f1;
     --primary-hover: #4f46e5;
-    --bg-color: #f8fafc;
+    --bg-color: #5C5269;
     --card-bg: rgba(255, 255, 255, 0.8);
     --text-main: #1e293b;
     --text-muted: #64748b;
@@ -58,29 +58,6 @@ h1, h2, h3 {
     box-shadow: var(--shadow-lg);
 }
 
-.login-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-}
-
-.login-form {
-    width: 100%;
-    max-width: 420px;
-    background: #fff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-}
-
-.login-header {
-    margin: 0 0 32px 0;
-    font-size: 1.875rem;
-    font-weight: 800;
-    color: #111827;
-    text-align: center;
-}
 
 .form-group {
     margin-bottom: 20px;

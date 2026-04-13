@@ -1,0 +1,114 @@
+.titulo-pagina {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 24px;
+    text-align: center;
+    letter-spacing: -0.025em;
+}
+
+.formulario-post {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.grupo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.etiqueta-formulario {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.campo-entrada,
+.campo-texto,
+.campo-archivo {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #1e293b;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+}
+
+.campo-entrada:focus,
+.campo-texto:focus {
+    outline: none;
+    border-color: #6366f1;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.campo-texto {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.campo-archivo {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.mensaje-error {
+    color: #ef4444;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #fef2f2;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #fee2e2;
+}
+
+.boton-primario {
+    background-color: #6366f1;
+    color: #ffffff;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 10px;
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+.boton-primario:hover {
+    background-color: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.boton-primario:active {
+    transform: translateY(0);
+}
+
+.enlace-volver {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.enlace-volver a {
+    color: #64748b;
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.enlace-volver a:hover {
+    color: #1e293b;
+    text-decoration: underline;
+}

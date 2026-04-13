@@ -1,0 +1,60 @@
+.titulo-contacto {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.parrafo-contacto {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.formulario-contacto {
+    display: flex;
+    background-color: white !important;
+    border-radius: 20px;
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.etiqueta-contacto {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.selector-contacto,
+.area-texto-contacto {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.area-texto-contacto {
+    resize: vertical;
+}
+
+.opcion-contacto {
+    color: #000;
+}
+
+.boton-contacto {
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.boton-contacto:active {
+    transform: scale(0.98);
+}

@@ -1,0 +1,50 @@
+.dashboard-acciones {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.dashboard-crear-link {
+  text-decoration: none;
+}
+
+.dashboard-boton-crear {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg, #5BCC3D, #AD3DCC);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dashboard-boton-crear:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px -5px rgba(99, 102, 241, 0.4);
+}
+
+.dashboard-carta-bienvenida {
+  background-color: #9E46BD !important;
+  border-color: #9E46BD !important;
+  margin-bottom: 48px;
+
+}
+
+.dashboard-carta-bienvenida.centered {
+  text-align: center;
+}
+
+.dashboard-titulo-bienvenida {
+  color: black !important;
+  margin-top: 0;
+}
+
+.dashboard-texto-bienvenida {
+  color: white !important;
+  font-size: 1.1rem;
+}

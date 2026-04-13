@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import PostCard from '../components/PostCard';
+import '../styles/SearchResultsStyle.css';
 
 const SearchResults = () => {
   const location = useLocation();
@@ -54,36 +55,36 @@ const SearchResults = () => {
 
   return (
     <div className="container">
-      <main style={{ marginTop: '20px' }}>
-        <h2 style={{ fontSize: '2rem', marginBottom: '8px' }}>Resultados de la búsqueda</h2>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>
+      <main className="seccion-principal">
+        <h2 className="titulo-resultados">Resultados de la búsqueda</h2>
+        <p className="subtitulo-resultados">
           Mostrando resultados para "{query}" en {type === 'post' ? 'Publicaciones' : 'Usuarios'}
         </p>
 
         {loading ? (
           <div>Buscando...</div>
         ) : error ? (
-          <div className="error">{error}</div>
+          <div className="mensaje-error">{error}</div>
         ) : results.length === 0 ? (
           <p>No se encontraron resultados.</p>
         ) : (
           type === 'post' ? (
-            <div className="posts-grid">
+            <div className="rejilla-publicaciones">
               {results.map((post) => (
                 <PostCard key={post.id} post={post} />
               ))}
             </div>
           ) : (
-            <ul style={{ listStyle: 'none', padding: 0 }}>
+            <ul className="lista-usuarios">
               {results.map((user) => (
-                <li key={user.id} className="card glass" style={{ marginBottom: '16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
-                    <h3 style={{ margin: 0, fontSize: '1.3rem' }}>
-                      <Link to={`/profile/${user.id}`} style={{ textDecoration: 'none', color: 'inherit' }} onMouseOver={(e) => e.target.style.color = 'var(--primary-color)'} onMouseOut={(e) => e.target.style.color = 'inherit'}>
+                <li key={user.id} className="tarjeta-usuario efecto-cristal">
+                  <div className="contenedor-info-usuario">
+                    <h3 className="nombre-usuario">
+                      <Link to={`/profile/${user.id}`} className="enlace-usuario">
                         {user.username}
                       </Link>
                     </h3>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                    <span className="conteo-seguidores">
                       {user.followers || 0} {user.followers === 1 ? 'seguidor' : 'seguidores'}
                     </span>
                   </div>

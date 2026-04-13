@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import httpClient from '../services/httpClient'
 import { getToken } from '../utils/storage'
 import { Link } from 'react-router-dom'
+import '../styles/CrearPostStyle.css'
 
 /**
  * Página que permite al usuario crear una nueva publicación.
@@ -72,46 +73,46 @@ const CrearPost = () => {
 
   return (
     <div className="container">
-      <h2>Crear Publicación</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
-        <div>
-          <label htmlFor="title">Título:</label>
+      <h2 className="titulo-pagina">Crear Publicación</h2>
+      <form onSubmit={handleSubmit} className="formulario-post">
+        <div className="grupo-formulario">
+          <label htmlFor="title" className="etiqueta-formulario">Título:</label>
           <input
             type="text"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            style={{ width: '100%' }}
+            className="campo-entrada"
           />
         </div>
-        <div>
-          <label htmlFor="description">Descripción:</label>
+        <div className="grupo-formulario">
+          <label htmlFor="description" className="etiqueta-formulario">Descripción:</label>
           <textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
             rows="4"
-            style={{ width: '100%' }}
+            className="campo-texto"
           />
         </div>
-        <div>
-          <label htmlFor="file">Imagen o Video:</label>
+        <div className="grupo-formulario">
+          <label htmlFor="file" className="etiqueta-formulario">Imagen o Video:</label>
           <input
             type="file"
             id="file"
             accept="image/*,video/*"
             onChange={handleFileChange}
-            style={{ width: '100%' }}
+            className="campo-archivo"
           />
         </div>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="mensaje-error">{error}</p>}
 
-        <button type="submit" className="btn-primary">Crear</button>
+        <button type="submit" className="boton-primario">Crear</button>
       </form>
-      <p className="small"><Link to="/dashboard">volve al inicio</Link></p>
+      <p className="enlace-volver"><Link to="/dashboard">Volver al inicio</Link></p>
     </div>
   )
 }

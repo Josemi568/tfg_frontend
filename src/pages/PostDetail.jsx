@@ -4,6 +4,7 @@ import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import httpClient from '../services/httpClient';
 import { getToken, isAdminUser } from '../utils/storage';
 import CommentList from '../components/CommentList';
+import '../styles/PostDetailStyle.css';
 
 /**
  * Página que muestra los detalles de una publicación.
@@ -193,97 +194,67 @@ const PostDetail = () => {
     });
   };
 
-  if (loading) return <div className="container" style={{ textAlign: 'center' }}>Cargando publicación...</div>;
-  if (error) return <div className="container error" style={{ textAlign: 'center' }}>{error}</div>;
+  if (loading) return <div className="contenedor-detalle centrada">Cargando publicación...</div>;
+  if (error) return <div className="contenedor-detalle centrada error">{error}</div>;
   if (!post) return null;
 
   const mediaSrc = getMediaSrc(post.img_video);
 
   return (
-    <div className="container" style={{ maxWidth: '900px' }}>
-      {/* <button
-        onClick={() => navigate(-1)}
-        style={{ marginBottom: '24px', background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}
-      >
-        &larr; Volver
-      </button> */}
-
-      <article className="card glass" style={{ padding: '40px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
-          <h1 style={{ fontSize: '3rem', margin: 0, lineHeight: '1.1', flex: 1 }}>
-            {post.title} {isAdmin && post.status === 1 && <span style={{ color: '#ef4444', fontSize: '0.5em', verticalAlign: 'middle', marginLeft: '12px' }}>(baneado)</span>}
+    <div className="container">
+      <article className="tarjeta-publicacion">
+        <div className="cabecera-detalle">
+          <h1 className="titulo-detalle">
+            {post.title} {isAdmin && post.status === 1 && <span className="texto-baneado">(baneado)</span>}
           </h1>
           {isAdmin && (
             <button
               onClick={handleBanToggle}
-              className={`btn ${post.status === 1 ? 'btn-secondary' : 'btn-danger'}`}
-              style={{ marginLeft: '24px', whiteSpace: 'nowrap' }}
+              className={`btn ${post.status === 1 ? 'btn-secondary' : 'btn-danger'} boton-accion-ban`}
             >
               {post.status === 1 ? 'Desbanear Publicación' : 'Banear Publicación'}
             </button>
           )}
         </div>
 
-        <div style={{ position: 'relative', width: '100%', marginBottom: '40px', borderRadius: '20px', overflow: 'hidden', background: '#f1f5f9', boxShadow: 'var(--shadow-lg)' }}>
+        <div className="contenedor-multimedia-detalle">
           {post.img_video ? (
             isVideo(mediaSrc) ? (
-              <video src={mediaSrc} controls className="detail-media" style={{ width: '100%', display: 'block' }} />
+              <video src={mediaSrc} controls className="multimedia-detalle" />
             ) : (
-              <img src={mediaSrc} alt={post.title} className="detail-media" style={{ width: '100%', display: 'block' }} />
+              <img src={mediaSrc} alt={post.title} className="multimedia-detalle" />
             )
           ) : (
-            <div style={{ padding: '80px', textAlign: 'center', color: '#94a3b8' }}>Sin contenido multimedia</div>
+            <div className="sin-multimedia">Sin contenido multimedia</div>
           )}
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-color)', paddingTop: '24px' }}>
-          <div>
-            <p style={{ margin: 0, fontSize: '1.1rem' }}>
+        <div className="info-pie-detalle">
+          <div className="contenedor-autor">
+            <p className="texto-autor">
               Publicado por{' '}
               <Link
                 to={`/profile/${post.author_id || post.author}`}
-                style={{ fontWeight: 700, color: 'var(--primary-color)', textDecoration: 'none' }}
-                onMouseOver={(e) => e.currentTarget.style.textDecoration = 'underline'}
-                onMouseOut={(e) => e.currentTarget.style.textDecoration = 'none'}
+                className="enlace-autor"
               >
                 {post.author}
               </Link>
             </p>
-            <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{post.date}</span>
+            <span className="fecha-publicacion">{post.date}</span>
           </div>
 
-
-
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="contenedor-reacciones">
+            <div className="contenedor-reaccion-unitaria">
               <button
                 onClick={() => handleLikeDislike('like')}
-                style={{
-                  background: userAction === 'like' ? '#e2e8f0' : '#f1f5f9',
-                  color: '#1e293b',
-                  border: userAction === 'like' ? '2px solid #3b82f6' : '1px solid var(--border-color)',
-                  padding: '8px 16px',
-                  borderRadius: '12px',
-                  cursor: 'pointer',
-                  fontWeight: userAction === 'like' ? 'bold' : 'normal',
-                  transition: 'all 0.2s ease'
-                }}>
+                className={`boton-reaccion ${userAction === 'like' ? 'like-activo' : ''}`}>
                 👍 {likes}
               </button>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="contenedor-reaccion-unitaria">
               <button
                 onClick={() => handleLikeDislike('dislike')}
-                style={{
-                  background: userAction === 'dislike' ? '#e2e8f0' : '#f1f5f9',
-                  color: '#1e293b',
-                  border: userAction === 'dislike' ? '2px solid #ef4444' : '1px solid var(--border-color)',
-                  padding: '8px 16px',
-                  borderRadius: '12px',
-                  cursor: 'pointer',
-                  fontWeight: userAction === 'dislike' ? 'bold' : 'normal',
-                  transition: 'all 0.2s ease'
-                }}>
+                className={`boton-reaccion ${userAction === 'dislike' ? 'dislike-activo' : ''}`}>
                 👎 {dislikes}
               </button>
             </div>
@@ -291,34 +262,32 @@ const PostDetail = () => {
         </div>
 
         {post.description && (
-          <div style={{ marginTop: '40px', fontSize: '1.2rem', lineHeight: '1.6', color: '#334155' }}>
+          <div className="descripcion-post">
             {post.description}
           </div>
         )}
 
-        {/* Sección de comentarios */}
-        <hr style={{ margin: '40px 0', border: 'none', borderTop: '1px solid var(--border-color)' }} />
+        <hr className="separador-detalle" />
 
-        <div style={{ marginTop: '20px' }}>
-          <h3 style={{ marginBottom: '16px', fontSize: '1.5rem', color: '#1e293b' }}>Comentarios</h3>
+        <div className="seccion-comentarios">
+          <h3 className="titulo-comentarios">Comentarios</h3>
 
-          <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <form onSubmit={handleCommentSubmit} className="formulario-comentarios">
             <input
               type="text"
               placeholder="comenta algo bonito"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              style={{ flex: 1, padding: '16px', borderRadius: '12px', border: '1px solid var(--border-color)', outline: 'none', fontSize: '1rem' }}
+              className="entrada-comentario"
               required
             />
-            <button type="submit" className="btn-primary" style={{ padding: '16px 32px', borderRadius: '12px', whiteSpace: 'nowrap', fontSize: '1rem', fontWeight: 600 }}>
+            <button type="submit" className="boton-enviar-comentario">
               Comentar
             </button>
           </form>
-          {commentError && <p style={{ color: 'red', marginTop: '12px', fontSize: '0.95rem' }}>{commentError}</p>}
-          {commentSuccess && <p style={{ color: 'green', marginTop: '12px', fontSize: '0.95rem' }}>{commentSuccess}</p>}
+          {commentError && <p className="error-comentario">{commentError}</p>}
+          {commentSuccess && <p className="exito-comentario">{commentSuccess}</p>}
 
-          {/* Lista de comentarios */}
           <CommentList postId={id} refreshTrigger={refreshComments} />
         </div>
       </article>
