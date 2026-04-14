@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import httpClient from '../services/httpClient';
 import { isAdminUser } from '../utils/storage';
+import '../styles/CommentListStyle.css';
 
 /**
  * Componente que recibe la información de la base de datos
@@ -51,30 +52,29 @@ const CommentList = ({ postId, refreshTrigger }) => {
   };
 
   if (loading) {
-    return <div style={{ marginTop: '32px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando comentarios...</div>;
+    return <div className="cargando-comentarios">Cargando comentarios...</div>;
   }
 
   if (error) {
-    return <div style={{ marginTop: '32px', textAlign: 'center', color: 'red' }}>{error}</div>;
+    return <div className="error-comentarios">{error}</div>;
   }
 
   return (
-    <div style={{ marginTop: '32px' }}>
+    <div className="lista-comentarios-container">
       {comments.length > 0 ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="contenedor-comentarios">
           {comments.map((comment) => (
-            <div key={comment.id} style={{ padding: '16px', background: '#f8fafc', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div key={comment.id} className="tarjeta-comentario">
               <div>
-                <div style={{ fontWeight: 600, marginBottom: '8px', color: '#0f172a' }}>
-                  {comment.author} {isAdmin && comment.status === 1 && <span style={{ color: '#ef4444', fontSize: '0.9em', marginLeft: '8px' }}>(Eliminado)</span>}
+                <div className="autor-comentario">
+                  {comment.author} {isAdmin && comment.status === 1 && <span className="etiqueta-eliminado">(Eliminado)</span>}
                 </div>
-                <div style={{ color: '#334155', lineHeight: '1.5' }}>{comment.text}</div>
+                <div className="texto-comentario">{comment.text}</div>
               </div>
               {isAdmin && (
                 <button
                   onClick={() => handleBanToggle(comment.id)}
-                  className={`btn ${comment.status === 1 ? 'btn-secondary' : 'btn-danger'}`}
-                  style={{ padding: '6px 12px', fontSize: '0.85rem', whiteSpace: 'nowrap', marginLeft: '16px' }}
+                  className={`btn ${comment.status === 1 ? 'btn-secondary' : 'btn-danger'} boton-eliminar`}
                 >
                   {comment.status === 1 ? 'Restaurar Comentario' : 'Eliminar Comentario'}
                 </button>
@@ -83,7 +83,7 @@ const CommentList = ({ postId, refreshTrigger }) => {
           ))}
         </div>
       ) : (
-        <p style={{ color: 'var(--text-muted)' }}>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+        <p className="mensaje-vacio">No hay comentarios aún. ¡Sé el primero en comentar!</p>
       )}
     </div>
   );

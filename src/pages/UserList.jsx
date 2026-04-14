@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import httpClient from '../services/httpClient'
 import { Link } from 'react-router-dom'
 import { changeRole, changeStatus } from '../services/auth'
+import '../styles/UserListStyle.css'
 
 /**
  * Página que muestra la lista de usuarios (solo para administradores).
@@ -79,25 +80,35 @@ const UserList = () => {
   if (error) return <div>Error cargando usuarios.</div>
 
   return (
-    <div className="user-list container">
-      <h2>Listado de usuarios</h2>
-      <p className="small"><Link to="/dashboard">volve al inicio</Link></p>
-      {successMsg && <div className="success-message">{successMsg}</div>}
+    <div className="lista-usuarios contenedor">
+      <h2 className="titulo-seccion">Listado de usuarios</h2>
+      <div className="volver-inicio">
+        <Link to="/dashboard">vuelve al inicio</Link>
+      </div>
+      {successMsg && <div className="mensaje-exito">{successMsg}</div>}
       {users.length === 0 ? (
         <p>No hay usuarios.</p>
       ) : (
-        <ul>
+        <ul className="lista-usuarios-ul">
           {users.map((u, idx) => (
-            <li className="user-item" key={u.id || u.username || idx}>
-              <div>
-                <strong>{u.username || u.name || JSON.stringify(u)}</strong>
-                <div style={{ fontSize: '0.85rem', color: '#666' }}>{u.email || (u.emailAddress) || ''}</div>
+            <li className="usuario-item" key={u.id || u.username || idx}>
+              <div className="usuario-info">
+                <strong className="usuario-nombre">{u.username || u.name || JSON.stringify(u)}</strong>
+                <div className="usuario-correo">{u.email || (u.emailAddress) || ''}</div>
               </div>
-              <div className="user-actions">
-                <button className="btn btn-secondary" onClick={() => handleChangeRole(u.id || u._id, u.username || u.name)} aria-label={`Cambiar rol ${u.username || u.name}`}>
+              <div className="usuario-acciones">
+                <button
+                  className="boton boton-rol"
+                  onClick={() => handleChangeRole(u.id || u._id, u.username || u.name)}
+                  aria-label={`Cambiar rol ${u.username || u.name}`}
+                >
                   Cambiar rol
                 </button>
-                <button className="btn btn-danger" onClick={() => handleChangeStatus(u.id || u._id, u.username || u.name)} aria-label={`${u.status === 1 ? 'Desbanear' : 'Banear'} ${u.username || u.name}`}>
+                <button
+                  className="boton boton-banear"
+                  onClick={() => handleChangeStatus(u.id || u._id, u.username || u.name)}
+                  aria-label={`${u.status === 1 ? 'Desbanear' : 'Banear'} ${u.username || u.name}`}
+                >
                   {u.status === 1 ? 'Desbanear' : 'Banear'}
                 </button>
               </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { isAdminUser } from '../utils/storage';
+import '../styles/PostCardStyle.css';
 
 /**
  * Componente que muestra una tarjeta con la
@@ -44,60 +45,47 @@ const PostCard = ({ post }) => {
   return (
     <div
       onClick={handleCardClick}
-      className="card post-card glass"
-      style={{ height: '100%', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
+      className="tarjeta-publicacion"
     >
-      <h3 className="post-title" style={{ transition: 'color 0.2s' }}>
-        {post.title} {isAdmin && post.status === 1 && <span style={{ color: '#ef4444', fontSize: '0.9em' }}>(baneado)</span>}
+      <h3 className="titulo-publicacion">
+        {post.title} {isAdmin && post.status === 1 && <span className="baneado-texto">(baneado)</span>}
       </h3>
 
-      <div className="post-media-container" style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: '12px', marginBottom: '16px', background: '#f1f5f9' }}>
+      <div className="contenedor-media">
         {post.img_video ? (
           isVideo(mediaSrc) ? (
             <video
               src={mediaSrc}
-              className="post-media"
+              className="media-publicacion"
               muted
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           ) : (
             <img
               src={mediaSrc}
               alt={post.title}
-              className="post-media"
+              className="media-publicacion"
               loading="lazy"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           )
-        ) : null}
-
-        <div className="media-placeholder" style={{
-          display: post.img_video ? 'none' : 'flex',
-          width: '100%',
-          height: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#94a3b8',
-          fontSize: '0.875rem'
-        }}>
-          Sin media disponible
-        </div>
+        ) : (
+          <div className="marcador-posicion-media">
+            Sin media disponible
+          </div>
+        )}
       </div>
 
-      <div className="post-meta" style={{ marginTop: 'auto' }}>
-        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem' }}>
+      <div className="metadatos-publicacion">
+        <p className="info-autor">
           Publicado por{' '}
           <Link 
             to={`/profile/${post.author_id || post.author}`} 
             onClick={(e) => e.stopPropagation()} 
-            style={{ fontWeight: 600, color: 'var(--primary-color)', textDecoration: 'none' }}
-            onMouseOver={(e) => e.currentTarget.style.textDecoration = 'underline'}
-            onMouseOut={(e) => e.currentTarget.style.textDecoration = 'none'}
+            className="autor-link"
           >
             {post.author}
           </Link>
         </p>
-        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{post.date}</span>
+        <span className="fecha-publicacion">{post.date}</span>
       </div>
     </div>
 

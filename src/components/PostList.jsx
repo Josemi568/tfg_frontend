@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import httpClient from '../services/httpClient';
 import { isAdminUser } from '../utils/storage';
 import PostCard from './PostCard';
+import '../styles/PostListStyle.css';
 
 /**
  * Componente que recibe la información de la base de datos
@@ -31,22 +32,22 @@ const PostList = () => {
   }, []);
 
   if (loading) {
-    return <div style={{ textAlign: 'center', padding: '40px' }}>Cargando publicaciones...</div>;
+    return <div className="mensaje-carga">Cargando publicaciones...</div>;
   }
 
   if (error) {
-    return <div className="error" style={{ textAlign: 'center', padding: '40px' }}>{error}</div>;
+    return <div className="mensaje-error">{error}</div>;
   }
 
   return (
-    <section style={{ marginTop: '48px' }}>
-      <h2 style={{ fontSize: '2rem', marginBottom: '8px' }}>Nuevas publicaciones</h2>
-      <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Explora lo último de la comunidad.</p>
+    <section className="seccion-lista-posts">
+      <h2 className="titulo-lista">Nuevas publicaciones</h2>
+      <p className="subtitulo-lista">Explora lo último de la comunidad.</p>
 
       {posts.length === 0 ? (
         <p>No hay publicaciones recientes.</p>
       ) : (
-        <div className="posts-grid">
+        <div className="cuadricula-posts">
           {posts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}

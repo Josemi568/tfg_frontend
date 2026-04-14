@@ -32,7 +32,7 @@
   background-color: #9E46BD !important;
   border-color: #9E46BD !important;
   margin-bottom: 48px;
-
+  box-shadow: 0 10px 25px -3px rgba(6, 6, 7, 0.041) !important;
 }
 
 .dashboard-carta-bienvenida.centered {

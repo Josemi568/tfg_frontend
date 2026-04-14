@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import httpClient from '../services/httpClient';
 import PostCard from '../components/PostCard';
 import { getToken } from '../utils/storage';
+import '../styles/UserProfileStyle.css';
 
 /**
  * Página de perfil de usuario.
@@ -116,8 +117,8 @@ const UserProfile = () => {
     fetchUserData();
   }, [id]);
 
-  if (loading) return <div className="container" style={{ textAlign: 'center', padding: '100px' }}>Cargando perfil...</div>;
-  if (error) return <div className="container error" style={{ textAlign: 'center', padding: '100px' }}>{error}</div>;
+  if (loading) return <div className="contenedor-perfil cargando">Cargando perfil...</div>;
+  if (error) return <div className="contenedor-perfil error">{error}</div>;
   if (!user) return null;
 
   const currentUserId = getUserIdFromToken();
@@ -125,93 +126,50 @@ const UserProfile = () => {
   const showFollowButton = currentUserId && String(currentUserId) !== String(user.id);
 
   return (
-    <div className="container" style={{ maxWidth: '1000px' }}>
-      {/* <button
-        onClick={() => navigate(-1)}
-        style={{ marginBottom: '32px', background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-color)', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer' }}
-      >
-        &larr; Volver
-      </button> */}
-
-      <div className="card glass" style={{ padding: '48px', marginBottom: '48px', border: 'none', background: 'rgba(255, 255, 255, 0.7)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <h1 style={{
-              fontSize: '3.5rem',
-              margin: 0,
-              background: 'linear-gradient(to right, #6366f1, #a855f7)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontWeight: 800
-            }}>
+    <div className="contenedor-perfil">
+      <div className="tarjeta-perfil">
+        <div className="cabecera-perfil">
+          <div className="info-usuario">
+            <h1 className="nombre-usuario">
               {user.username}
             </h1>
             {showFollowButton && (
               <button
                 onClick={handleFollow}
-                style={{
-                  padding: '10px 24px',
-                  borderRadius: '24px',
-                  border: isFollowingLocal ? '1px solid var(--border-color, #ccc)' : 'none',
-                  background: isFollowingLocal ? 'transparent' : 'var(--primary-color, #6366f1)',
-                  color: isFollowingLocal ? 'var(--text-color, #333)' : 'white',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  boxShadow: isFollowingLocal ? 'none' : 'var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05))',
-                  transition: 'all 0.2s',
-                  fontSize: '1rem'
-                }}
-                onMouseOver={(e) => {
-                  if (isFollowingLocal) {
-                    e.currentTarget.style.background = '#ffe5e5';
-                    e.currentTarget.style.color = '#ef4444';
-                    e.currentTarget.style.borderColor = '#ef4444';
-                  } else {
-                    e.currentTarget.style.background = '#4f46e5';
-                  }
-                }}
-                onMouseOut={(e) => {
-                  if (isFollowingLocal) {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = 'var(--text-color, #333)';
-                    e.currentTarget.style.borderColor = 'var(--border-color, #ccc)';
-                  } else {
-                    e.currentTarget.style.background = 'var(--primary-color, #6366f1)';
-                  }
-                }}
+                className={`boton-seguir ${isFollowingLocal ? 'siguiendo' : 'no-siguiendo'}`}
               >
                 {isFollowingLocal ? 'Dejar de seguir' : 'Seguir'}
               </button>
             )}
           </div>
 
-          <div style={{ display: 'flex', gap: '40px', background: 'var(--surface-color)', padding: '20px 40px', borderRadius: '24px', boxShadow: 'var(--shadow-sm)' }}>
-            <div style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '1.75rem', fontWeight: 700, color: 'var(--primary-color)' }}>
+          <div className="estadisticas-perfil">
+            <div className="item-estadistica">
+              <span className="valor-estadistica">
                 {typeof user.followers === 'number' ? user.followers : (user.followers?.length || 0)}
               </span>
-              <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Seguidores</span>
+              <span className="etiqueta-estadistica">Seguidores</span>
             </div>
-            <div style={{ width: '1px', background: 'var(--border-color)' }}></div>
-            <div style={{ textAlign: 'center' }}>
-              <span style={{ display: 'block', fontSize: '1.75rem', fontWeight: 700, color: 'var(--primary-color)' }}>
+            <div className="separador-estadistica"></div>
+            <div className="item-estadistica">
+              <span className="valor-estadistica">
                 {typeof user.follows === 'number' ? user.follows : (user.follows?.length || 0)}
               </span>
-              <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Siguiendo</span>
+              <span className="etiqueta-estadistica">Siguiendo</span>
             </div>
           </div>
         </div>
       </div>
 
       <section>
-        <h2 style={{ fontSize: '2.25rem', marginBottom: '32px', fontWeight: 700 }}>Publicaciones</h2>
+        <h2 className="titulo-seccion-publicaciones">Publicaciones</h2>
 
         {posts.length === 0 ? (
-          <div className="card glass" style={{ textAlign: 'center', padding: '60px' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem' }}>Este usuario aún no ha publicado nada.</p>
+          <div className="tarjeta-perfil contenedor-vacio">
+            <p className="mensaje-vacio">Este usuario aún no ha publicado nada.</p>
           </div>
         ) : (
-          <div className="posts-grid">
+          <div className="cuadricula-publicaciones">
             {posts.map(post => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -223,3 +181,4 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+
