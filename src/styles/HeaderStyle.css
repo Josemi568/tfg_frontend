@@ -1,9 +1,5 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 10px 20px;
-  margin-bottom: 20px;
   background-color: #771394;
   position: relative;
   transition: all 0.3s ease;
@@ -25,17 +21,10 @@
 }
 
 .buscador-container {
-  position: relative;
-  flex: 1;
   max-width: 750px;
 }
 
-.formulario-busqueda {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
+/* .formulario-busqueda movido a Bootstrap d-flex */
 
 .buscador-select {
   padding: 10px;
@@ -76,11 +65,10 @@
   background-color: #139478 !important;
 }
 
-.botones-header {
-  display: flex;
-  gap: 10px;
-  flex-shrink: 0;
-  align-items: center;
+/* .botones-header movido a Bootstrap d-flex */
+
+.botones-header a {
+  text-decoration: none;
 }
 
 .botones-header button {
@@ -91,6 +79,18 @@
   cursor: pointer;
   transition: all 0.2s;
   border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .botones-header button {
+    padding: 6px 12px;
+    font-size: 13px;
+    height: 50px;
+    /* Altura fija para asegurar uniformidad */
+  }
 }
 
 .boton-contacto,

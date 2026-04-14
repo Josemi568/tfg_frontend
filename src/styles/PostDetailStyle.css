@@ -1,26 +1,19 @@
 .tarjeta-publicacion {
-    background: rgba(255, 255, 255, 0.7);
+    background: #C0E892;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid #C0E892;
     border-radius: 16px;
-    padding: 40px;
+    padding: clamp(16px, 4vw, 40px);
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-.cabecera-detalle {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
-}
+/* Movido a clases d-flex en el JSX */
 
 .titulo-detalle {
-    font-size: 3rem;
-    margin: 0;
-    line-height: 1.1;
-    flex: 1;
+    font-size: clamp(1.5rem, 6vw, 3rem);
     color: #1e293b;
+    line-height: 1.2;
 }
 
 .texto-baneado {
@@ -31,46 +24,28 @@
 }
 
 .boton-accion-ban {
-    margin-left: 24px;
+    /* margin-left removido en favor de gap en d-flex */
     white-space: nowrap;
 }
 
 .contenedor-multimedia-detalle {
-    position: relative;
-    width: 100%;
-    margin-bottom: 40px;
     border-radius: 20px;
-    overflow: hidden;
     background: #f1f5f9;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-.multimedia-detalle {
-    width: 100%;
-    display: block;
-}
+/* Movido a clases BS */
 
 .sin-multimedia {
-    padding: 80px;
+    padding: clamp(40px, 10vw, 80px);
     text-align: center;
     color: #94a3b8;
 }
 
 .info-pie-detalle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border-top: 1px solid #e2e8f0;
-    padding-top: 24px;
-}
-
-.contenedor-autor {
-    display: flex;
-    flex-direction: column;
 }
 
 .texto-autor {
-    margin: 0;
     font-size: 1.1rem;
     color: #1e293b;
 }
@@ -91,16 +66,7 @@
     color: #64748b;
 }
 
-.contenedor-reacciones {
-    display: flex;
-    gap: 16px;
-}
-
-.contenedor-reaccion-unitaria {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+/* movido a clases bs */
 
 .boton-reaccion {
     color: #1e293b;
@@ -130,7 +96,6 @@
 }
 
 .descripcion-post {
-    margin-top: 40px;
     font-size: 1.2rem;
     line-height: 1.6;
     color: #334155;
@@ -152,14 +117,7 @@
     color: #1e293b;
 }
 
-.formulario-comentarios {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
-
 .entrada-comentario {
-    flex: 1;
     padding: 16px;
     border-radius: 12px;
     border: 1px solid #e2e8f0;
@@ -175,7 +133,6 @@
 .boton-enviar-comentario {
     padding: 16px 32px;
     border-radius: 12px;
-    white-space: nowrap;
     font-size: 1rem;
     font-weight: 600;
     background-color: #6366f1;

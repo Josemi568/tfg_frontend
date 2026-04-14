@@ -9,12 +9,9 @@
 }
 
 .formulario-contacto {
-    display: flex;
     background-color: white !important;
     border-radius: 20px;
     padding: 20px;
-    flex-direction: column;
-    gap: 20px;
 }
 
 .etiqueta-contacto {
@@ -25,7 +22,6 @@
 
 .selector-contacto,
 .area-texto-contacto {
-    width: 100%;
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #e2e8f0;

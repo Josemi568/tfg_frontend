@@ -41,18 +41,26 @@ const PostList = () => {
 
   return (
     <section className="seccion-lista-posts">
-      <h2 className="titulo-lista">Nuevas publicaciones</h2>
-      <p className="subtitulo-lista">Explora lo último de la comunidad.</p>
+      <div className="container-fluid py-3 py-md-4 py-lg-5 px-3 px-md-4 px-lg-5">
+        <main className="row justify-content-center m-0 w-100">
+          <div className="col-12 col-xl-11 col-xxl-10">
+            <h2 className="titulo-lista">Nuevas publicaciones</h2>
+            <p className="subtitulo-lista">Explora lo último de la comunidad.</p>
 
-      {posts.length === 0 ? (
-        <p>No hay publicaciones recientes.</p>
-      ) : (
-        <div className="cuadricula-posts">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
-      )}
+            {posts.length === 0 ? (
+              <p>No hay publicaciones recientes.</p>
+            ) : (
+              <div className="row g-4 mt-1">
+                {posts.map((post) => (
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3" key={post.id}>
+                    <PostCard post={post} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </main>
+      </div>
     </section>
   );
 };

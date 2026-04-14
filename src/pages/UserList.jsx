@@ -80,42 +80,48 @@ const UserList = () => {
   if (error) return <div>Error cargando usuarios.</div>
 
   return (
-    <div className="lista-usuarios contenedor">
-      <h2 className="titulo-seccion">Listado de usuarios</h2>
-      <div className="volver-inicio">
-        <Link to="/dashboard">vuelve al inicio</Link>
-      </div>
-      {successMsg && <div className="mensaje-exito">{successMsg}</div>}
-      {users.length === 0 ? (
-        <p>No hay usuarios.</p>
-      ) : (
-        <ul className="lista-usuarios-ul">
-          {users.map((u, idx) => (
-            <li className="usuario-item" key={u.id || u.username || idx}>
-              <div className="usuario-info">
-                <strong className="usuario-nombre">{u.username || u.name || JSON.stringify(u)}</strong>
-                <div className="usuario-correo">{u.email || (u.emailAddress) || ''}</div>
-              </div>
-              <div className="usuario-acciones">
-                <button
-                  className="boton boton-rol"
-                  onClick={() => handleChangeRole(u.id || u._id, u.username || u.name)}
-                  aria-label={`Cambiar rol ${u.username || u.name}`}
-                >
-                  Cambiar rol
-                </button>
-                <button
-                  className="boton boton-banear"
-                  onClick={() => handleChangeStatus(u.id || u._id, u.username || u.name)}
-                  aria-label={`${u.status === 1 ? 'Desbanear' : 'Banear'} ${u.username || u.name}`}
-                >
-                  {u.status === 1 ? 'Desbanear' : 'Banear'}
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="container-fluid py-3 py-md-4 py-lg-5 px-3 px-md-4 px-lg-5">
+      <main className="row justify-content-center m-0 w-100">
+        <div className="col-12 col-xl-11 col-xxl-10">
+          <div className="lista-usuarios contenedor mx-auto">
+            <h2 className="titulo-seccion">Listado de usuarios</h2>
+            <div className="volver-inicio">
+              <Link to="/dashboard">vuelve al inicio</Link>
+            </div>
+            {successMsg && <div className="mensaje-exito">{successMsg}</div>}
+            {users.length === 0 ? (
+              <p>No hay usuarios.</p>
+            ) : (
+              <ul className="lista-usuarios-ul ps-0">
+                {users.map((u, idx) => (
+                  <li className="usuario-item d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 p-3 p-md-4" key={u.id || u.username || idx}>
+                    <div className="usuario-info d-flex flex-column gap-1">
+                      <strong className="usuario-nombre">{u.username || u.name || JSON.stringify(u)}</strong>
+                      <div className="usuario-correo">{u.email || (u.emailAddress) || ''}</div>
+                    </div>
+                    <div className="usuario-acciones d-flex flex-wrap gap-2">
+                      <button
+                        className="boton boton-rol text-nowrap"
+                        onClick={() => handleChangeRole(u.id || u._id, u.username || u.name)}
+                        aria-label={`Cambiar rol ${u.username || u.name}`}
+                      >
+                        Cambiar rol
+                      </button>
+                      <button
+                        className="boton boton-banear text-nowrap"
+                        onClick={() => handleChangeStatus(u.id || u._id, u.username || u.name)}
+                        aria-label={`${u.status === 1 ? 'Desbanear' : 'Banear'} ${u.username || u.name}`}
+                      >
+                        {u.status === 1 ? 'Desbanear' : 'Banear'}
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </main>
     </div>
   )
 }

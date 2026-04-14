@@ -54,45 +54,49 @@ const SearchResults = () => {
   }, [type, query]);
 
   return (
-    <div className="container">
-      <main className="seccion-principal">
-        <h2 className="titulo-resultados">Resultados de la búsqueda</h2>
-        <p className="subtitulo-resultados">
-          Mostrando resultados para "{query}" en {type === 'post' ? 'Publicaciones' : 'Usuarios'}
-        </p>
+    <div className="container-fluid py-3 py-md-4 py-lg-5 px-3 px-md-4 px-lg-5">
+      <main className="row justify-content-center seccion-principal m-0 w-100">
+        <div className="col-12 col-xl-11 col-xxl-10">
+          <h2 className="titulo-resultados">Resultados de la búsqueda</h2>
+          <p className="subtitulo-resultados">
+            Mostrando resultados para "{query}" en {type === 'post' ? 'Publicaciones' : 'Usuarios'}
+          </p>
 
-        {loading ? (
-          <div>Buscando...</div>
-        ) : error ? (
-          <div className="mensaje-error">{error}</div>
-        ) : results.length === 0 ? (
-          <p>No se encontraron resultados.</p>
-        ) : (
-          type === 'post' ? (
-            <div className="rejilla-publicaciones">
-              {results.map((post) => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
+          {loading ? (
+            <div>Buscando...</div>
+          ) : error ? (
+            <div className="mensaje-error">{error}</div>
+          ) : results.length === 0 ? (
+            <p>No se encontraron resultados.</p>
           ) : (
-            <ul className="lista-usuarios">
-              {results.map((user) => (
-                <li key={user.id} className="tarjeta-usuario efecto-cristal">
-                  <div className="contenedor-info-usuario">
-                    <h3 className="nombre-usuario">
-                      <Link to={`/profile/${user.id}`} className="enlace-usuario">
-                        {user.username}
-                      </Link>
-                    </h3>
-                    <span className="conteo-seguidores">
-                      {user.followers || 0} {user.followers === 1 ? 'seguidor' : 'seguidores'}
-                    </span>
+            type === 'post' ? (
+              <div className="row g-4 mt-1">
+                {results.map((post) => (
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3" key={post.id}>
+                    <PostCard post={post} />
                   </div>
-                </li>
-              ))}
-            </ul>
-          )
-        )}
+                ))}
+              </div>
+            ) : (
+              <ul className="lista-usuarios list-unstyled p-0">
+                {results.map((user) => (
+                  <li key={user.id} className="tarjeta-usuario efecto-cristal">
+                    <div className="contenedor-info-usuario d-flex align-items-baseline gap-2">
+                      <h3 className="nombre-usuario">
+                        <Link to={`/profile/${user.id}`} className="enlace-usuario">
+                          {user.username}
+                        </Link>
+                      </h3>
+                      <span className="conteo-seguidores">
+                        {user.followers || 0} {user.followers === 1 ? 'seguidor' : 'seguidores'}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )
+          )}
+        </div>
       </main>
     </div>
   );

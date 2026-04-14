@@ -15,20 +15,13 @@
     /* Changed red to a standard hex */
 }
 
-.contenedor-comentarios {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
+/* clases css movidas a bootstrap d-flex flex-column gap-3 */
 
 .tarjeta-comentario {
     padding: 16px;
     background: #f8fafc;
     border-radius: 12px;
     border: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
 }
 
 .autor-comentario {
@@ -51,8 +44,6 @@
 .boton-eliminar {
     padding: 6px 12px !important;
     font-size: 0.85rem !important;
-    white-space: nowrap;
-    margin-left: 16px;
 }
 
 .mensaje-vacio {

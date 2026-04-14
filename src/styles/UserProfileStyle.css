@@ -1,7 +1,7 @@
 .contenedor-perfil {
-    max-width: 1000px;
+    max-width: 1400px;
     margin: auto;
-    padding: 40px 20px;
+    padding: clamp(20px, 4vw, 60px);
 }
 
 .contenedor-perfil.cargando,
@@ -11,40 +11,27 @@
 }
 
 .tarjeta-perfil {
-    padding: 48px;
-    margin-bottom: 48px;
+    padding: clamp(20px, 5vw, 64px);
+    margin-bottom: clamp(30px, 6vw, 80px);
     border: none;
     background: rgba(255, 255, 255, 0.7);
-    border-radius: 16px;
+    border-radius: 24px;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-.cabecera-perfil {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 24px;
-}
-
-.info-usuario {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
+/* display flex de la cabecera y el info-usuario manejados por Bootstrap `d-flex align-items-center gap-3 ...` */
 
 .nombre-usuario {
-    font-size: 3.5rem;
-    margin: 0;
+    font-size: 3.5rem !important;
     background: linear-gradient(to right, #6366f1, #a855f7);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    font-weight: 800;
+    line-height: 1.1;
 }
 
 .boton-seguir {
@@ -81,30 +68,23 @@
 }
 
 .estadisticas-perfil {
-    display: flex;
-    gap: 40px;
-    background: #ffffff;
-    padding: 20px 40px;
     border-radius: 24px;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
-.item-estadistica {
-    text-align: center;
-}
+/* Movido a text-center con bootstrap */
 
 .valor-estadistica {
-    display: block;
-    font-size: 1.75rem;
-    font-weight: 700;
     color: #6366f1;
+    transition: transform 0.3s ease;
+}
+
+.item-estadistica:hover .valor-estadistica {
+    transform: scale(1.1);
 }
 
 .etiqueta-estadistica {
-    font-size: 0.9rem;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 .separador-estadistica {
@@ -119,7 +99,6 @@
 }
 
 .contenedor-vacio {
-    text-align: center;
     padding: 60px;
 }
 
@@ -128,9 +107,32 @@
     font-size: 1.2rem;
 }
 
-.cuadricula-publicaciones {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
+/* Modificado para usar Bootstrap grid (row/col) */
+
+.ls-1 {
+    letter-spacing: 1px;
+}
+
+/* Soporte para pantallas 4K / UHD */
+@media (min-width: 2500px) {
+    .contenedor-perfil {
+        max-width: 2000px;
+    }
+
+    .nombre-usuario {
+        font-size: 6rem !important;
+    }
+
+    .valor-estadistica {
+        font-size: 4rem !important;
+    }
+
+    .etiqueta-estadistica {
+        font-size: 1.5rem !important;
+    }
+
+    .boton-seguir {
+        padding: 20px 48px;
+        font-size: 1.5rem;
+    }
 }

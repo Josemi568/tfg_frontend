@@ -2,25 +2,14 @@
     font-size: 2rem;
     font-weight: 800;
     color: #1e293b;
-    margin-bottom: 24px;
-    text-align: center;
     letter-spacing: -0.025em;
 }
 
 .formulario-post {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
     padding: 40px;
     background: white;
     border-radius: 20px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-}
-
-.grupo-formulario {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
 }
 
 .etiqueta-formulario {
@@ -32,7 +21,6 @@
 .campo-entrada,
 .campo-texto,
 .campo-archivo {
-    width: 100%;
     padding: 12px 16px;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
@@ -93,11 +81,6 @@
 
 .boton-primario:active {
     transform: translateY(0);
-}
-
-.enlace-volver {
-    text-align: center;
-    margin-top: 24px;
 }
 
 .enlace-volver a {

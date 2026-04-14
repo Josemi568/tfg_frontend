@@ -21,17 +21,9 @@
     font-weight: 500;
 }
 
-.rejilla-publicaciones {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-}
+/* grid movido a utilidades Bootstrap */
 
-.lista-usuarios {
-    list-style: none;
-    padding: 0;
-}
+/* list-style: none y padding 0 movido a list-unstyled p-0 de Bootstrap */
 
 .tarjeta-usuario {
     margin-bottom: 16px;
@@ -54,11 +46,7 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.contenedor-info-usuario {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-}
+/* display flex movido a className en JSX */
 
 .nombre-usuario {
     margin: 0;

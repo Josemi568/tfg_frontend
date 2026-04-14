@@ -55,10 +55,6 @@
 }
 
 .usuario-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
     border-bottom: 1px solid #e2e8f0;
     transition: background-color 0.2s;
 }
@@ -71,11 +67,7 @@
     background-color: #f8fafc;
 }
 
-.usuario-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
+/* Clases d-flex asignadas en el html */
 
 .usuario-nombre {
     font-size: 1.1rem;
@@ -88,10 +80,7 @@
     color: #64748b;
 }
 
-.usuario-acciones {
-    display: flex;
-    gap: 12px;
-}
+/* Clases d-flex gap-2 en HTML */
 
 .boton {
     padding: 10px 20px;

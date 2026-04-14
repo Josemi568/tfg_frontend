@@ -62,9 +62,9 @@ const CommentList = ({ postId, refreshTrigger }) => {
   return (
     <div className="lista-comentarios-container">
       {comments.length > 0 ? (
-        <div className="contenedor-comentarios">
+        <div className="contenedor-comentarios d-flex flex-column gap-3">
           {comments.map((comment) => (
-            <div key={comment.id} className="tarjeta-comentario">
+            <div key={comment.id} className="tarjeta-comentario d-flex flex-column flex-sm-row justify-content-between align-items-sm-start gap-3">
               <div>
                 <div className="autor-comentario">
                   {comment.author} {isAdmin && comment.status === 1 && <span className="etiqueta-eliminado">(Eliminado)</span>}
@@ -74,7 +74,7 @@ const CommentList = ({ postId, refreshTrigger }) => {
               {isAdmin && (
                 <button
                   onClick={() => handleBanToggle(comment.id)}
-                  className={`btn ${comment.status === 1 ? 'btn-secondary' : 'btn-danger'} boton-eliminar`}
+                  className={`btn ${comment.status === 1 ? 'btn-secondary' : 'btn-danger'} boton-eliminar align-self-end align-self-sm-start text-nowrap`}
                 >
                   {comment.status === 1 ? 'Restaurar Comentario' : 'Eliminar Comentario'}
                 </button>

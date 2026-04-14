@@ -28,40 +28,46 @@ const Register = () => {
   }
 
   return (
-    <div className="container envoltorio-registro">
-      <form className="formulario-registro" onSubmit={handleRegister}>
-        <h2 className="cabecera-registro">Registro</h2>
+    <div className="container-fluid py-3 py-md-4 py-lg-5 px-3 px-md-4 px-lg-5 envoltorio-registro d-flex align-items-center justify-content-center">
+      <main className="row justify-content-center w-100">
+        <div className="col-12 d-flex justify-content-center">
+          <form className="formulario-registro w-100" onSubmit={handleRegister}>
+            <h2 className="cabecera-registro text-center mb-4">Registro</h2>
 
-        <div className="grupo-formulario">
-          <label htmlFor="username">Usuario</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Tu usuario"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            required
-          />
+            <div className="grupo-formulario mb-3">
+              <label htmlFor="username" className="d-block mb-2 text-dark fw-medium">Usuario</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Tu usuario"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                required
+                className="w-100"
+              />
+            </div>
+
+            <div className="grupo-formulario mb-3">
+              <label htmlFor="password" className="d-block mb-2 text-dark fw-medium">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Contraseña"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+                className="w-100"
+              />
+            </div>
+
+            {error && <p className="error-registro mt-2">{error}</p>}
+            {success && <p className="exito-registro mt-2">{success}</p>}
+
+            <button type="submit" className="boton-primario w-100 d-block mt-3">Registrarse</button>
+            <p className="texto-pequeno text-center mt-3"><Link to="/dashboard">Volver al inicio</Link></p>
+          </form>
         </div>
-
-        <div className="grupo-formulario">
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        {error && <p className="error-registro">{error}</p>}
-        {success && <p className="exito-registro">{success}</p>}
-
-        <button type="submit" className="boton-primario">Registrarse</button>
-        <p className="texto-pequeno"><Link to="/dashboard">volve al inicio</Link></p>
-      </form>
+      </main>
     </div>
   )
 }

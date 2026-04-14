@@ -78,7 +78,7 @@ const Header = () => {
             </Form>
           </div>
 
-          <Nav className="botones-header d-flex flex-row flex-wrap justify-content-center align-items-center gap-2 mt-2 mt-lg-0">
+          <Nav className="botones-header d-flex flex-row flex-wrap flex-md-nowrap justify-content-center align-items-center gap-2 mt-2 mt-lg-0">
             <Link to={isAuthenticated ? "/contact" : "/login"}>
               <Button variant="light" className="boton-contacto shadow-sm">
                 Contacto

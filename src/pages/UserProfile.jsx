@@ -126,56 +126,64 @@ const UserProfile = () => {
   const showFollowButton = currentUserId && String(currentUserId) !== String(user.id);
 
   return (
-    <div className="contenedor-perfil">
-      <div className="tarjeta-perfil">
-        <div className="cabecera-perfil">
-          <div className="info-usuario">
-            <h1 className="nombre-usuario">
-              {user.username}
-            </h1>
-            {showFollowButton && (
-              <button
-                onClick={handleFollow}
-                className={`boton-seguir ${isFollowingLocal ? 'siguiendo' : 'no-siguiendo'}`}
-              >
-                {isFollowingLocal ? 'Dejar de seguir' : 'Seguir'}
-              </button>
-            )}
-          </div>
+    <div className="container-fluid py-3 py-md-4 py-lg-5 px-3 px-md-4 px-lg-5">
+      <main className="row justify-content-center m-0 w-100">
+        <div className="col-12 col-xl-11 col-xxl-10">
+          <div className="contenedor-perfil">
+            <div className="tarjeta-perfil">
+              <div className="cabecera-perfil d-flex flex-column flex-md-row justify-content-between align-items-center flex-wrap gap-4 mb-5">
+                <div className="info-usuario d-flex flex-column flex-sm-row align-items-center gap-3 mb-4 mb-md-0">
+                  <h1 className="nombre-usuario display-3 display-md-2 display-lg-1 fw-bold mb-0">
+                    {user.username}
+                  </h1>
+                  {showFollowButton && (
+                    <button
+                      onClick={handleFollow}
+                      className={`boton-seguir btn-lg ${isFollowingLocal ? 'siguiendo' : 'no-siguiendo'}`}
+                    >
+                      {isFollowingLocal ? 'Dejar de seguir' : 'Seguir'}
+                    </button>
+                  )}
+                </div>
 
-          <div className="estadisticas-perfil">
-            <div className="item-estadistica">
-              <span className="valor-estadistica">
-                {typeof user.followers === 'number' ? user.followers : (user.followers?.length || 0)}
-              </span>
-              <span className="etiqueta-estadistica">Seguidores</span>
-            </div>
-            <div className="separador-estadistica"></div>
-            <div className="item-estadistica">
-              <span className="valor-estadistica">
-                {typeof user.follows === 'number' ? user.follows : (user.follows?.length || 0)}
-              </span>
-              <span className="etiqueta-estadistica">Siguiendo</span>
+                <div className="estadisticas-perfil d-flex gap-2 gap-sm-3 bg-white p-2 p-md-4 shadow-sm border rounded-4">
+                  <div className="item-estadistica text-center px-1 px-sm-2">
+                    <span className="valor-estadistica fs-4 fs-sm-2 fs-md-1 fw-bold d-block">
+                      {typeof user.followers === 'number' ? user.followers : (user.followers?.length || 0)}
+                    </span>
+                    <span className="etiqueta-estadistica text-uppercase small ls-1 text-muted" style={{ fontSize: '0.65rem' }}>Seguidores</span>
+                  </div>
+                  <div className="separador-estadistica border-start h-100 mx-1"></div>
+                  <div className="item-estadistica text-center px-1 px-sm-2">
+                    <span className="valor-estadistica fs-4 fs-sm-2 fs-md-1 fw-bold d-block">
+                      {typeof user.follows === 'number' ? user.follows : (user.follows?.length || 0)}
+                    </span>
+                    <span className="etiqueta-estadistica text-uppercase small ls-1 text-muted" style={{ fontSize: '0.65rem' }}>Siguiendo</span>
+                  </div>
+                </div>
+              </div>
+
+              <section>
+                <h2 className="titulo-seccion-publicaciones fs-4 fs-md-2 fw-bold">Publicaciones</h2>
+
+                {posts.length === 0 ? (
+                  <div className="tarjeta-perfil contenedor-vacio text-center">
+                    <p className="mensaje-vacio">Este usuario aún no ha publicado nada.</p>
+                  </div>
+                ) : (
+                  <div className="row g-4 mt-1">
+                    {posts.map(post => (
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3" key={post.id}>
+                        <PostCard post={post} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
             </div>
           </div>
         </div>
-      </div>
-
-      <section>
-        <h2 className="titulo-seccion-publicaciones">Publicaciones</h2>
-
-        {posts.length === 0 ? (
-          <div className="tarjeta-perfil contenedor-vacio">
-            <p className="mensaje-vacio">Este usuario aún no ha publicado nada.</p>
-          </div>
-        ) : (
-          <div className="cuadricula-publicaciones">
-            {posts.map(post => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
-      </section>
+      </main>
     </div>
   );
 };

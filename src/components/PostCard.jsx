@@ -45,7 +45,7 @@ const PostCard = ({ post }) => {
   return (
     <div
       onClick={handleCardClick}
-      className="tarjeta-publicacion"
+      className="tarjeta-publicacion d-flex flex-column h-100"
     >
       <h3 className="titulo-publicacion">
         {post.title} {isAdmin && post.status === 1 && <span className="baneado-texto">(baneado)</span>}

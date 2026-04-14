@@ -14,29 +14,9 @@
     text-decoration: underline;
 }
 
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
+/* .footer-container movido a Bootstrap Container */
 
-.footer-info {
-    flex: 1;
-    text-align: left;
-}
-
-.footer-copyright {
-    flex: 1;
-    text-align: center;
-}
-
-.footer-icons {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-}
+/* .footer-info, .footer-copyright, .footer-icons movidos a Bootstrap Col */
 
 .footer-icons img {
     width: 44px;

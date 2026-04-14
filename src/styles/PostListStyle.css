@@ -3,22 +3,17 @@
 }
 
 .titulo-lista {
+    color: black !important;
     font-size: 2rem;
     margin-bottom: 8px;
 }
 
 .subtitulo-lista {
-    color: #64748b; /* Reemplazado var(--text-muted) */
+    color: rgb(54, 52, 52);
     margin-bottom: 32px;
 }
 
-.cuadricula-posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-}
-
+/* .cuadricula-posts movido a bootstrap row y col */
 .mensaje-carga,
 .mensaje-error {
     text-align: center;
@@ -26,7 +21,8 @@
 }
 
 .mensaje-error {
-    color: #ef4444; /* Heredado de .error en index.css */
+    color: #ef4444;
+    /* Heredado de .error en index.css */
     font-size: 14px;
     margin-top: 8px;
     font-weight: 500;

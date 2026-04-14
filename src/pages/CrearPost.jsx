@@ -71,50 +71,56 @@ const CrearPost = () => {
     }
   }
 
-  return (
-    <div className="container">
-      <h2 className="titulo-pagina">Crear Publicación</h2>
-      <form onSubmit={handleSubmit} className="formulario-post">
-        <div className="grupo-formulario">
-          <label htmlFor="title" className="etiqueta-formulario">Título:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="campo-entrada"
-          />
-        </div>
-        <div className="grupo-formulario">
-          <label htmlFor="description" className="etiqueta-formulario">Descripción:</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-            rows="4"
-            className="campo-texto"
-          />
-        </div>
-        <div className="grupo-formulario">
-          <label htmlFor="file" className="etiqueta-formulario">Imagen o Video:</label>
-          <input
-            type="file"
-            id="file"
-            accept="image/*,video/*"
-            onChange={handleFileChange}
-            className="campo-archivo"
-          />
-        </div>
+    return (
+        <div className="container-fluid py-3 py-md-4 py-lg-5 px-3 px-md-4 px-lg-5">
+            <main className="row justify-content-center">
+                <div className="col-12 col-xl-11 col-xxl-10">
+                    <div className="container">
+                        <h2 className="titulo-pagina text-center mb-4">Crear Publicación</h2>
+                        <form onSubmit={handleSubmit} className="formulario-post d-flex flex-column gap-3">
+                            <div className="grupo-formulario d-flex flex-column gap-2">
+                                <label htmlFor="title" className="etiqueta-formulario">Título:</label>
+                                <input
+                                    type="text"
+                                    id="title"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    required
+                                    className="campo-entrada w-100"
+                                />
+                            </div>
+                            <div className="grupo-formulario d-flex flex-column gap-2">
+                                <label htmlFor="description" className="etiqueta-formulario">Descripción:</label>
+                                <textarea
+                                    id="description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    required
+                                    rows="4"
+                                    className="campo-texto w-100"
+                                />
+                            </div>
+                            <div className="grupo-formulario d-flex flex-column gap-2">
+                                <label htmlFor="file" className="etiqueta-formulario">Imagen o Video:</label>
+                                <input
+                                    type="file"
+                                    id="file"
+                                    accept="image/*,video/*"
+                                    onChange={handleFileChange}
+                                    className="campo-archivo w-100"
+                                />
+                            </div>
 
-        {error && <p className="mensaje-error">{error}</p>}
+                            {error && <p className="mensaje-error">{error}</p>}
 
-        <button type="submit" className="boton-primario">Crear</button>
-      </form>
-      <p className="enlace-volver"><Link to="/dashboard">Volver al inicio</Link></p>
-    </div>
-  )
+                            <button type="submit" className="boton-primario w-100 mt-3 align-self-start">Crear</button>
+                        </form>
+                        <p className="enlace-volver text-center mt-4"><Link to="/dashboard">Volver al inicio</Link></p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    )
 }
 
 export default CrearPost

@@ -201,96 +201,100 @@ const PostDetail = () => {
   const mediaSrc = getMediaSrc(post.img_video);
 
   return (
-    <div className="container">
-      <article className="tarjeta-publicacion">
-        <div className="cabecera-detalle">
-          <h1 className="titulo-detalle">
-            {post.title} {isAdmin && post.status === 1 && <span className="texto-baneado">(baneado)</span>}
-          </h1>
-          {isAdmin && (
-            <button
-              onClick={handleBanToggle}
-              className={`btn ${post.status === 1 ? 'btn-secondary' : 'btn-danger'} boton-accion-ban`}
-            >
-              {post.status === 1 ? 'Desbanear Publicación' : 'Banear Publicación'}
-            </button>
-          )}
-        </div>
-
-        <div className="contenedor-multimedia-detalle">
-          {post.img_video ? (
-            isVideo(mediaSrc) ? (
-              <video src={mediaSrc} controls className="multimedia-detalle" />
-            ) : (
-              <img src={mediaSrc} alt={post.title} className="multimedia-detalle" />
-            )
-          ) : (
-            <div className="sin-multimedia">Sin contenido multimedia</div>
-          )}
-        </div>
-
-        <div className="info-pie-detalle">
-          <div className="contenedor-autor">
-            <p className="texto-autor">
-              Publicado por{' '}
-              <Link
-                to={`/profile/${post.author_id || post.author}`}
-                className="enlace-autor"
-              >
-                {post.author}
-              </Link>
-            </p>
-            <span className="fecha-publicacion">{post.date}</span>
-          </div>
-
-          <div className="contenedor-reacciones">
-            <div className="contenedor-reaccion-unitaria">
-              <button
-                onClick={() => handleLikeDislike('like')}
-                className={`boton-reaccion ${userAction === 'like' ? 'like-activo' : ''}`}>
-                👍 {likes}
-              </button>
+    <div className="container-fluid py-3 py-md-4 py-lg-5 px-2 px-sm-3 px-md-4 px-lg-5">
+      <main className="row justify-content-center m-0 w-100">
+        <div className="col-12 col-xl-11 col-xxl-11">
+          <article className="tarjeta-publicacion">
+            <div className="cabecera-detalle d-flex flex-column flex-md-row justify-content-between align-items-md-start mb-4 gap-3">
+              <h1 className="titulo-detalle flex-grow-1 m-0">
+                {post.title} {isAdmin && post.status === 1 && <span className="texto-baneado">(baneado)</span>}
+              </h1>
+              {isAdmin && (
+                <button
+                  onClick={handleBanToggle}
+                  className={`btn ${post.status === 1 ? 'btn-secondary' : 'btn-danger'} boton-accion-ban text-nowrap align-self-start align-self-md-auto`}
+                >
+                  {post.status === 1 ? 'Desbanear Publicación' : 'Banear Publicación'}
+                </button>
+              )}
             </div>
-            <div className="contenedor-reaccion-unitaria">
-              <button
-                onClick={() => handleLikeDislike('dislike')}
-                className={`boton-reaccion ${userAction === 'dislike' ? 'dislike-activo' : ''}`}>
-                👎 {dislikes}
-              </button>
+
+            <div className="contenedor-multimedia-detalle position-relative w-100 mb-4 overflow-hidden shadow-sm">
+              {post.img_video ? (
+                isVideo(mediaSrc) ? (
+                  <video src={mediaSrc} controls className="multimedia-detalle w-100 d-block" />
+                ) : (
+                  <img src={mediaSrc} alt={post.title} className="multimedia-detalle w-100 d-block" />
+                )
+              ) : (
+                <div className="sin-multimedia text-center p-5 text-secondary">Sin contenido multimedia</div>
+              )}
             </div>
-          </div>
+
+            <div className="info-pie-detalle d-flex flex-column flex-sm-row justify-content-between align-items-sm-center pt-4">
+              <div className="contenedor-autor d-flex flex-column mb-3 mb-sm-0">
+                <p className="texto-autor m-0">
+                  Publicado por{' '}
+                  <Link
+                    to={`/profile/${post.author_id || post.author}`}
+                    className="enlace-autor"
+                  >
+                    {post.author}
+                  </Link>
+                </p>
+                <span className="fecha-publicacion">{post.date}</span>
+              </div>
+
+              <div className="contenedor-reacciones d-flex gap-3 mt-2 mt-sm-0">
+                <div className="contenedor-reaccion-unitaria d-flex align-items-center gap-2">
+                  <button
+                    onClick={() => handleLikeDislike('like')}
+                    className={`boton-reaccion ${userAction === 'like' ? 'like-activo' : ''}`}>
+                    👍 {likes}
+                  </button>
+                </div>
+                <div className="contenedor-reaccion-unitaria d-flex align-items-center gap-2">
+                  <button
+                    onClick={() => handleLikeDislike('dislike')}
+                    className={`boton-reaccion ${userAction === 'dislike' ? 'dislike-activo' : ''}`}>
+                    👎 {dislikes}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {post.description && (
+              <div className="descripcion-post mt-4">
+                {post.description}
+              </div>
+            )}
+
+            <hr className="separador-detalle my-5" />
+
+            <div className="seccion-comentarios mt-4">
+              <h3 className="titulo-comentarios mb-3">Comentarios</h3>
+
+              <form onSubmit={handleCommentSubmit} className="formulario-comentarios d-flex flex-column flex-sm-row gap-3 align-items-stretch align-items-sm-center">
+                <input
+                  type="text"
+                  placeholder="comenta algo bonito"
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  className="entrada-comentario flex-grow-1"
+                  required
+                />
+                <button type="submit" className="boton-enviar-comentario text-nowrap">
+                  Comentar
+                </button>
+              </form>
+              {commentError && <p className="error-comentario mt-2 text-danger">{commentError}</p>}
+              {commentSuccess && <p className="exito-comentario mt-2 text-success">{commentSuccess}</p>}
+
+              <CommentList postId={id} refreshTrigger={refreshComments} />
+            </div>
+          </article>
         </div>
-
-        {post.description && (
-          <div className="descripcion-post">
-            {post.description}
-          </div>
-        )}
-
-        <hr className="separador-detalle" />
-
-        <div className="seccion-comentarios">
-          <h3 className="titulo-comentarios">Comentarios</h3>
-
-          <form onSubmit={handleCommentSubmit} className="formulario-comentarios">
-            <input
-              type="text"
-              placeholder="comenta algo bonito"
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-              className="entrada-comentario"
-              required
-            />
-            <button type="submit" className="boton-enviar-comentario">
-              Comentar
-            </button>
-          </form>
-          {commentError && <p className="error-comentario">{commentError}</p>}
-          {commentSuccess && <p className="exito-comentario">{commentSuccess}</p>}
-
-          <CommentList postId={id} refreshTrigger={refreshComments} />
-        </div>
-      </article>
+      </main>
     </div>
   );
 };

@@ -26,40 +26,46 @@ const Login = () => {
   }
 
   return (
-    <div className="container envoltorio-login">
-      <form className="formulario-login" onSubmit={handleLogin}>
-        <h2 className="cabecera-login">Iniciar sesión</h2>
+    <div className="container-fluid py-3 py-md-4 py-lg-5 px-3 px-md-4 px-lg-5 envoltorio-login d-flex align-items-center justify-content-center">
+      <main className="row justify-content-center w-100">
+        <div className="col-12 d-flex justify-content-center">
+          <form className="formulario-login w-100" onSubmit={handleLogin}>
+            <h2 className="cabecera-login text-center mb-4">Iniciar sesión</h2>
 
-        <div className="grupo-formulario">
-          <label htmlFor="username">Usuario</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Tu usuario"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            required
-          />
+            <div className="grupo-formulario mb-3">
+              <label htmlFor="username" className="d-block mb-2 text-dark fw-medium">Usuario</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Tu usuario"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                required
+                className="w-100"
+              />
+            </div>
+
+            <div className="grupo-formulario mb-3">
+              <label htmlFor="password" className="d-block mb-2 text-dark fw-medium">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Tu contraseña"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+                className="w-100"
+              />
+            </div>
+
+            {error && <p className="error-login mt-2">{error}</p>}
+
+            <button type="submit" className="boton-entrar w-100 d-block mt-3">Entrar</button>
+            <p className="texto-pequeno text-center mt-3">¿No tienes cuenta? <Link to="/register">Regístrate</Link></p>
+            <p className="texto-pequeno text-center"><Link to="/dashboard">Volver al inicio</Link></p>
+          </form>
         </div>
-
-        <div className="grupo-formulario">
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Tu contraseña"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        {error && <p className="error-login">{error}</p>}
-
-        <button type="submit" className="boton-entrar">Entrar</button>
-        <p className="texto-pequeno">¿No tienes cuenta? <Link to="/register">Regístrate</Link></p>
-        <p className="texto-pequeno"><Link to="/dashboard">volve al inicio</Link></p>
-      </form>
+      </main>
     </div>
   )
 }
