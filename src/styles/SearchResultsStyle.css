@@ -10,7 +10,7 @@
 }
 
 .subtitulo-resultados {
-    color: #64748b;
+    color: #343c46;
     margin-bottom: 32px;
 }
 
@@ -21,17 +21,23 @@
     font-weight: 500;
 }
 
-/* grid movido a utilidades Bootstrap */
-
-/* list-style: none y padding 0 movido a list-unstyled p-0 de Bootstrap */
+.lista-resultados-usuarios {
+    background: transparent !important;
+    padding: 0;
+    margin: 0;
+    box-shadow: none !important;
+}
 
 .tarjeta-usuario {
     margin-bottom: 16px;
-    background: #fff;
+    background: #C0E892 !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid #C0E892 !important;
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tarjeta-usuario:hover {
@@ -46,13 +52,11 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* display flex movido a className en JSX */
-
 .nombre-usuario {
     margin: 0;
     font-size: 1.3rem;
     font-weight: 700;
-    color: #1e293b;
+    color: #7834C2 !important;
 }
 
 .enlace-usuario {
@@ -67,5 +71,5 @@
 
 .conteo-seguidores {
     font-size: 0.9rem;
-    color: #64748b;
+    color: #131518;
 }

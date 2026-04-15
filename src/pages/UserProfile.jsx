@@ -133,7 +133,7 @@ const UserProfile = () => {
             <div className="tarjeta-perfil">
               <div className="cabecera-perfil d-flex flex-column flex-md-row justify-content-between align-items-center flex-wrap gap-4 mb-5">
                 <div className="info-usuario d-flex flex-column flex-sm-row align-items-center gap-3 mb-4 mb-md-0">
-                  <h1 className="nombre-usuario display-3 display-md-2 display-lg-1 fw-bold mb-0">
+                  <h1 className="nombre-usuario text-break display-3 display-md-2 display-lg-1 fw-bold mb-0">
                     {user.username}
                   </h1>
                   {showFollowButton && (
@@ -146,7 +146,7 @@ const UserProfile = () => {
                   )}
                 </div>
 
-                <div className="estadisticas-perfil d-flex gap-2 gap-sm-3 bg-white p-2 p-md-4 shadow-sm border rounded-4">
+                <div className="estadisticas-perfil d-flex flex-wrap justify-content-center gap-2 gap-sm-3 p-2 p-md-4 rounded-4">
                   <div className="item-estadistica text-center px-1 px-sm-2">
                     <span className="valor-estadistica fs-4 fs-sm-2 fs-md-1 fw-bold d-block">
                       {typeof user.followers === 'number' ? user.followers : (user.followers?.length || 0)}
@@ -173,7 +173,7 @@ const UserProfile = () => {
                 ) : (
                   <div className="row g-4 mt-1">
                     {posts.map(post => (
-                      <div className="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3" key={post.id}>
+                      <div className="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3" key={post.id}>
                         <PostCard post={post} />
                       </div>
                     ))}

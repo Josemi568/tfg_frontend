@@ -14,7 +14,7 @@
     padding: clamp(20px, 5vw, 64px);
     margin-bottom: clamp(30px, 6vw, 80px);
     border: none;
-    background: rgba(255, 255, 255, 0.7);
+    background-color: #85f077 !important;
     border-radius: 24px;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -25,13 +25,15 @@
 /* display flex de la cabecera y el info-usuario manejados por Bootstrap `d-flex align-items-center gap-3 ...` */
 
 .nombre-usuario {
-    font-size: 3.5rem !important;
-    background: linear-gradient(to right, #6366f1, #a855f7);
+    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+    background: linear-gradient(to right, #7834C2, #a855f7);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
     line-height: 1.1;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .boton-seguir {
@@ -44,38 +46,37 @@
 }
 
 .boton-seguir.siguiendo {
-    border: 1px solid #e2e8f0;
-    background: transparent;
-    color: #1e293b;
-    box-shadow: none;
+    border: none;
+    background-color: #631fac !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.boton-seguir.siguiendo:hover {
+    background-color: #a855f7 !important;
 }
 
 .boton-seguir.no-siguiendo {
     border: none;
-    background: #6366f1;
+    background: #7834C2;
     color: white;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
-.boton-seguir.siguiendo:hover {
-    background: #ffe5e5;
-    color: #ef4444;
-    border-color: #ef4444;
-}
 
 .boton-seguir.no-siguiendo:hover {
-    background: #4f46e5;
+    background: #a855f7;
 }
 
 .estadisticas-perfil {
+    background-color: #7834C2 !important;
     border-radius: 24px;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    border: none !important;
 }
 
-/* Movido a text-center con bootstrap */
-
 .valor-estadistica {
-    color: #6366f1;
+    color: white !important;
     transition: transform 0.3s ease;
 }
 
@@ -85,11 +86,12 @@
 
 .etiqueta-estadistica {
     letter-spacing: 2px;
+    color: white !important;
 }
 
 .separador-estadistica {
     width: 1px;
-    background: #e2e8f0;
+    background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .titulo-seccion-publicaciones {
@@ -103,11 +105,9 @@
 }
 
 .mensaje-vacio {
-    color: #64748b;
+    color: #373d44;
     font-size: 1.2rem;
 }
-
-/* Modificado para usar Bootstrap grid (row/col) */
 
 .ls-1 {
     letter-spacing: 1px;

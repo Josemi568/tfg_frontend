@@ -85,9 +85,6 @@ const UserList = () => {
         <div className="col-12 col-xl-11 col-xxl-10">
           <div className="lista-usuarios contenedor mx-auto">
             <h2 className="titulo-seccion">Listado de usuarios</h2>
-            <div className="volver-inicio">
-              <Link to="/dashboard">vuelve al inicio</Link>
-            </div>
             {successMsg && <div className="mensaje-exito">{successMsg}</div>}
             {users.length === 0 ? (
               <p>No hay usuarios.</p>

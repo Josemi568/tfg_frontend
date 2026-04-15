@@ -58,7 +58,7 @@ const SearchResults = () => {
       <main className="row justify-content-center seccion-principal m-0 w-100">
         <div className="col-12 col-xl-11 col-xxl-10">
           <h2 className="titulo-resultados">Resultados de la búsqueda</h2>
-          <p className="subtitulo-resultados">
+          <p className="subtitulo-resultados text-break">
             Mostrando resultados para "{query}" en {type === 'post' ? 'Publicaciones' : 'Usuarios'}
           </p>
 
@@ -72,22 +72,22 @@ const SearchResults = () => {
             type === 'post' ? (
               <div className="row g-4 mt-1">
                 {results.map((post) => (
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3" key={post.id}>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3" key={post.id}>
                     <PostCard post={post} />
                   </div>
                 ))}
               </div>
             ) : (
-              <ul className="lista-usuarios list-unstyled p-0">
+              <ul className="lista-resultados-usuarios list-unstyled p-0">
                 {results.map((user) => (
                   <li key={user.id} className="tarjeta-usuario efecto-cristal">
-                    <div className="contenedor-info-usuario d-flex align-items-baseline gap-2">
-                      <h3 className="nombre-usuario">
+                    <div className="contenedor-info-usuario d-flex flex-column flex-sm-row align-items-sm-baseline gap-2">
+                      <h3 className="nombre-usuario text-break mb-0">
                         <Link to={`/profile/${user.id}`} className="enlace-usuario">
                           {user.username}
                         </Link>
                       </h3>
-                      <span className="conteo-seguidores">
+                      <span className="conteo-seguidores text-break">
                         {user.followers || 0} {user.followers === 1 ? 'seguidor' : 'seguidores'}
                       </span>
                     </div>

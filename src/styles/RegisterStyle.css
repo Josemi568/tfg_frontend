@@ -4,7 +4,7 @@
 
 .formulario-registro {
     max-width: 420px;
-    background: #fff;
+    background: #C0E892;
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -33,12 +33,12 @@
 
 .grupo-formulario input:focus {
     outline: none;
-    border-color: #6366f1;
+    border-color: #a855f7 !important;
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .boton-primario {
-    background-color: #6366f1;
+    background-color: #7834C2 !important;
     color: white;
     padding: 12px 24px;
     border: none;
@@ -50,7 +50,7 @@
 }
 
 .boton-primario:hover {
-    background-color: #4f46e5;
+    background-color: #a855f7 !important;
 }
 
 .boton-primario:active {

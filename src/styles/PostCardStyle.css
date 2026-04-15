@@ -60,7 +60,7 @@
 
 .autor-link {
     font-weight: 600;
-    color: #6366f1;
+    color: #8846CF;
     text-decoration: none;
 }
 
@@ -70,5 +70,5 @@
 
 .fecha-publicacion {
     font-size: 0.75rem;
-    color: #64748b;
+    color: #293038 !important;
 }

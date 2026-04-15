@@ -9,7 +9,7 @@
 }
 
 .formulario-contacto {
-    background-color: white !important;
+    background-color: #C0E892 !important;
     border-radius: 20px;
     padding: 20px;
 }
@@ -25,7 +25,6 @@
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
-    background: transparent;
     color: inherit;
     font-family: inherit;
     font-size: 1rem;
@@ -40,17 +39,22 @@
     color: #000;
 }
 
-.boton-contacto {
-    padding: 12px;
+form.formulario-contacto .boton-contacto {
+    padding: 12px 24px;
     border-radius: 8px;
-    color: white;
+    color: white !important;
+    background: #7834C2 !important;
     border: none;
     cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background 0.2s, transform 0.1s;
 }
 
-.boton-contacto:active {
+form.formulario-contacto .boton-contacto:hover {
+    background: #a855f7 !important;
+}
+
+form.formulario-contacto .boton-contacto:active {
     transform: scale(0.98);
 }
