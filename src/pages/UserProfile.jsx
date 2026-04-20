@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import httpClient from '../services/httpClient';
 import PostCard from '../components/PostCard';
-import { getToken } from '../utils/storage';
+import { getToken, isAdminUser } from '../utils/storage';
 import '../styles/UserProfileStyle.css';
 
 /**
@@ -101,8 +101,11 @@ const UserProfile = () => {
         // Filtramos los posts cuyo autor coincida con el id del perfil
         // Asumimos que el objeto post tiene author_id o author (si es el id)
         // Por la función listUsers del backend, sabemos que el usuario tiene 'posts' como un array de IDs
+        const adminStatus = isAdminUser();
+        const isBannedUser = userData.status === 1;
+
         const userPosts = postsResponse.data.filter(post =>
-          userData.posts.includes(post.id)
+          userData.posts.includes(post.id) && (adminStatus || !isBannedUser)
         );
 
         setPosts(userPosts);

@@ -18,7 +18,7 @@ const PostList = () => {
       try {
         const response = await httpClient.get('/post/api/all');
         const adminStatus = isAdminUser();
-        const availablePosts = response.data.filter(post => adminStatus || post.status !== 1);
+        const availablePosts = response.data.filter(post => adminStatus || (post.status !== 1 && post.author_status !== 1));
         setPosts(availablePosts);
         setLoading(false);
       } catch (err) {
