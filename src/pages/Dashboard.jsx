@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getToken, getItem } from '../utils/storage'
+import { getToken, getItem, setItem } from '../utils/storage'
+import httpClient from '../services/httpClient'
 import PostList from '../components/PostList'
 import '../styles/DashboardStyle.css'
 
 const Dashboard = () => {
   const isAuthenticated = !!getToken()
   const username = getItem('username')
+  const [userStatus, setUserStatus] = useState(Number(getItem('status')) || 0)
+
+  useEffect(() => {
+    if (isAuthenticated && username) {
+      httpClient.post('/search', { type: 'user', query: username })
+        .then(res => {
+          if (res.data && Array.isArray(res.data)) {
+            const me = res.data.find(u => u.username === username)
+            if (me && me.status !== undefined) {
+              setUserStatus(me.status)
+              setItem('status', me.status)
+            }
+          }
+        })
+        .catch(err => console.error('Failed to fetch user status', err))
+    }
+  }, [isAuthenticated, username])
+
 
   return (
     /**
@@ -25,17 +44,19 @@ const Dashboard = () => {
           {isAuthenticated ? (
             <>
               <div className="dashboard-acciones d-flex flex-column flex-sm-row justify-content-sm-start mb-4 gap-3 align-items-stretch align-items-sm-center">
-                <Link to="/crear-post" className="dashboard-crear-link text-decoration-none">
-                  <div className="d-grid d-sm-block">
-                    <button className="dashboard-boton-crear shadow-sm w-100 justify-content-center justify-content-sm-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="me-2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                      </svg>
-                      Crear publicación
-                    </button>
-                  </div>
-                </Link>
+                {userStatus === 0 && (
+                  <Link to="/crear-post" className="dashboard-crear-link text-decoration-none">
+                    <div className="d-grid d-sm-block">
+                      <button className="dashboard-boton-crear shadow-sm w-100 justify-content-center justify-content-sm-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="me-2">
+                          <line x1="12" y1="5" x2="12" y2="19"></line>
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Crear publicación
+                      </button>
+                    </div>
+                  </Link>
+                )}
               </div>
               <div className="card glass dashboard-carta-bienvenida p-4 p-md-5 mb-4 mb-md-5 shadow-sm">
                 <h2 className="dashboard-titulo-bienvenida mb-2 mb-md-3">Hola{username ? `, ${username}` : ''}</h2>
