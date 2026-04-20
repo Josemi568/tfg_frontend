@@ -18,6 +18,12 @@ const Register = () => {
     setError('')
     setSuccess('')
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/
+    if (!passwordRegex.test(password)) {
+      setError('La contraseña debe tener al menos 8 caracteres, mayúsculas, minúsculas, números y símbolos.')
+      return
+    }
+
     try {
       await registerUser({ username, password })
       setSuccess('Registro correcto. Redirigiendo...')

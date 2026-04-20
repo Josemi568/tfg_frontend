@@ -50,8 +50,6 @@
     background-color: #f8fafc;
 }
 
-/* Clases d-flex asignadas en el html */
-
 .usuario-nombre {
     font-size: 1.1rem;
     font-weight: 700;
@@ -62,8 +60,6 @@
     font-size: 0.875rem;
     color: #64748b;
 }
-
-/* Clases d-flex gap-2 en HTML */
 
 .boton {
     padding: 10px 20px;

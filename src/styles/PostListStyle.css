@@ -13,7 +13,6 @@
     margin-bottom: 32px;
 }
 
-/* .cuadricula-posts movido a bootstrap row y col */
 .mensaje-carga,
 .mensaje-error {
     text-align: center;
@@ -22,7 +21,6 @@
 
 .mensaje-error {
     color: #ef4444;
-    /* Heredado de .error en index.css */
     font-size: 14px;
     margin-top: 8px;
     font-weight: 500;

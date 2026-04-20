@@ -64,7 +64,7 @@ const Dashboard = () => {
                   Nos alegra verte de nuevo. Aquí tienes las últimas novedades de la plataforma.
                 </p>
               </div>
-              <PostList />
+              <PostList limit={4} />
             </>
           ) : (
             <div className="card glass dashboard-carta-bienvenida centered p-4 p-md-5 mb-4 mb-md-5 shadow-sm text-center">

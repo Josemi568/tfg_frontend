@@ -8,8 +8,6 @@
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-/* Movido a clases d-flex en el JSX */
-
 .titulo-detalle {
     font-size: clamp(1.5rem, 6vw, 3rem);
     color: #1e293b;
@@ -24,7 +22,6 @@
 }
 
 .boton-accion-ban {
-    /* margin-left removido en favor de gap en d-flex */
     white-space: nowrap;
 }
 
@@ -32,8 +29,6 @@
     border-radius: 20px;
     background: #f1f5f9;
 }
-
-/* Movido a clases BS */
 
 .sin-multimedia {
     padding: clamp(40px, 10vw, 80px);

@@ -14,13 +14,8 @@
     text-decoration: underline;
 }
 
-/* .footer-container movido a Bootstrap Container */
-
-/* .footer-info, .footer-copyright, .footer-icons movidos a Bootstrap Col */
-
 .footer-icons img {
     width: 44px;
     height: 44px;
     object-fit: contain;
 }
-

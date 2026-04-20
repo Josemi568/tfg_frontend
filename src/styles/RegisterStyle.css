@@ -17,8 +17,6 @@
     color: #111827;
 }
 
-/* Eliminadas las reglas .grupo-formulario y .grupo-formulario label por ser resueltas con Bootstrap */
-
 .grupo-formulario input[type="text"],
 .grupo-formulario input[type="password"] {
     padding: 12px 16px;

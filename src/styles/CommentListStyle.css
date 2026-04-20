@@ -12,10 +12,8 @@
     margin-top: 32px;
     text-align: center;
     color: #ef4444;
-    /* Changed red to a standard hex */
 }
 
-/* clases css movidas a bootstrap d-flex flex-column gap-3 */
 
 .tarjeta-comentario {
     padding: 16px;
