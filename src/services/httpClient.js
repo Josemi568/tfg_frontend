@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const httpClient = axios.create({
-  baseURL: 'http://localhost:8000/api', // Local API base URL
+  baseURL: import.meta.env.PROD ? '/api' : 'http://localhost:8000/api', // Uses relative /api in prod, local API in dev
   headers: {
     'Content-Type': 'application/json',
   },
