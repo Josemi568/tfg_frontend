@@ -1,10 +1,19 @@
 .envoltorio-registro {
     min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fef7ff;
+    /* Fondo sutil para resaltar el formulario */
+    padding: 2rem;
+    font-family: 'Manrope', sans-serif;
 }
 
 .formulario-registro {
+    width: 100%;
     max-width: 420px;
-    background: #C0E892;
+    background: white;
+    /* Cambiado de #C0E892 a blanco para el look profesional */
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -14,72 +23,129 @@
     margin: 0 0 32px 0;
     font-size: 1.875rem;
     font-weight: 800;
-    color: #111827;
+    color: #1a1c1e;
+    /* Color neutro profesional */
+    text-align: center;
+}
+
+.cabecera-registro p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+/* Estilos de los grupos del formulario */
+.grupo-formulario {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-formulario label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #374151;
+    margin-bottom: 0.5rem;
 }
 
 .grupo-formulario input[type="text"],
 .grupo-formulario input[type="password"] {
     padding: 12px 16px;
-    margin: 8px 0;
-    border: 1px solid #e2e8f0;
+    margin: 4px 0;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
     font-family: inherit;
     font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.2s;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .grupo-formulario input:focus {
     outline: none;
-    border-color: #a855f7 !important;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    border-color: #4c1d95 !important;
+    /* Violeta principal */
+    box-shadow: 0 0 0 3px rgba(76, 29, 149, 0.15);
 }
 
+/* Botón de acción principal */
 .boton-primario {
-    background-color: #7834C2 !important;
+    width: 100%;
+    background-color: #4c1d95 !important;
+    /* Violeta Premium */
     color: white;
-    padding: 12px 24px;
+    padding: 14px 24px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 0.5rem;
 }
 
 .boton-primario:hover {
-    background-color: #a855f7 !important;
+    background-color: #3a1671 !important;
+    transform: translateY(-1px);
 }
 
 .boton-primario:active {
     transform: scale(0.98);
 }
 
+/* Estados de feedback */
 .error-registro {
     color: #ef4444;
     font-size: 14px;
     margin-top: 8px;
     font-weight: 500;
+    background-color: #fef2f2;
+    padding: 8px;
+    border-radius: 6px;
 }
 
 .exito-registro {
-    color: #22c55e;
+    color: #10b981;
     font-size: 14px;
     margin-top: 8px;
     font-weight: 500;
+    background-color: #ecfdf5;
+    padding: 8px;
+    border-radius: 6px;
 }
 
+/* Enlaces y textos secundarios */
 .texto-pequeno {
+    margin-top: 2rem;
+    text-align: center;
     font-size: 0.875rem;
     color: #64748b;
 }
 
 .texto-pequeno a {
-    color: #6366f1;
+    color: #4c1d95;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    transition: color 0.2s;
 }
 
 .texto-pequeno a:hover {
+    color: #3a1671;
     text-decoration: underline;
+}
+
+.link-volver {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-decoration: none;
+}
+
+.link-volver:hover {
+    color: #6b7280;
 }
