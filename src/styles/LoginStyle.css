@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: center;
     background-color: #fef7ff;
-    /* Fondo sutil para coherencia con registro */
     padding: 2rem;
     font-family: 'Manrope', sans-serif;
 }
@@ -13,7 +12,6 @@
     width: 100%;
     max-width: 420px;
     background: white;
-    /* Cambiado de #C0E892 a blanco para el look profesional */
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -24,11 +22,9 @@
     font-size: 1.875rem;
     font-weight: 800;
     color: #1a1c1e;
-    /* Color neutro profesional */
     text-align: center;
 }
 
-/* Estilos de los grupos del formulario */
 .grupo-formulario {
     margin-bottom: 1.5rem;
     display: flex;
@@ -60,15 +56,12 @@
 .grupo-formulario input:focus {
     outline: none;
     border-color: #4c1d95 !important;
-    /* Violeta principal */
     box-shadow: 0 0 0 3px rgba(76, 29, 149, 0.15);
 }
 
-/* Botón de entrada principal */
 .boton-entrar {
     width: 100%;
     background-color: #4c1d95 !important;
-    /* Violeta Premium */
     color: white;
     padding: 14px 24px;
     border: none;
@@ -89,7 +82,6 @@
     transform: scale(0.98);
 }
 
-/* Estados de error */
 .error-login {
     color: #ef4444;
     font-size: 14px;
@@ -101,7 +93,6 @@
     text-align: center;
 }
 
-/* Enlaces y textos secundarios */
 .texto-pequeno {
     margin-top: 2rem;
     text-align: center;

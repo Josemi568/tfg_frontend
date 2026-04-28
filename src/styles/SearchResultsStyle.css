@@ -1,79 +1,3 @@
-/* .seccion-principal {
-    margin-top: 20px;
-}
-
-.titulo-resultados {
-    font-size: 2rem;
-    margin-bottom: 8px;
-    color: #1e293b;
-    font-weight: 700;
-}
-
-.subtitulo-resultados {
-    color: #343c46;
-    margin-bottom: 32px;
-}
-
-.mensaje-error {
-    color: #ef4444;
-    font-size: 14px;
-    margin-top: 8px;
-    font-weight: 500;
-}
-
-.lista-resultados-usuarios {
-    background: transparent !important;
-    padding: 0;
-    margin: 0;
-    box-shadow: none !important;
-}
-
-.tarjeta-usuario {
-    margin-bottom: 16px;
-    background: #C0E892 !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid #C0E892 !important;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.tarjeta-usuario:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-
-.efecto-cristal {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.nombre-usuario {
-    margin: 0;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #7834C2 !important;
-}
-
-.enlace-usuario {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.2s;
-}
-
-.enlace-usuario:hover {
-    color: #6366f1;
-}
-
-.conteo-seguidores {
-    font-size: 0.9rem;
-    color: #131518;
-} */
-
 .seccion-principal {
     margin-top: 40px;
     padding: 0 20px;
@@ -118,12 +42,9 @@
     gap: 16px;
 }
 
-/* Tarjeta de Usuario - Cambio de Verde a Morado Claro Profesional */
 .tarjeta-usuario {
     margin-bottom: 0;
-    /* Controlado por el gap del contenedor */
     background: #d7a2f1;
-    /* Violeta lavanda sutil y profesional */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(76, 29, 149, 0.1) !important;
@@ -139,7 +60,6 @@
 .tarjeta-usuario:hover {
     transform: translateY(-4px);
     background: #e2bef4 !important;
-    /* Morado un poco más claro al pasar el ratón */
     border-color: rgba(76, 29, 149, 0.3) !important;
     box-shadow: 0 20px 25px -5px rgba(76, 29, 149, 0.15);
 }
@@ -149,7 +69,6 @@
     font-size: 1.5rem;
     font-weight: 800;
     color: #4c1d95 !important;
-    /* Violeta Premium Artist */
     letter-spacing: -0.01em;
 }
 
@@ -166,9 +85,7 @@
     display: block;
 }
 
-/* Opcional: Si usas la clase efecto-cristal */
 .efecto-cristal {
-    /* Eliminado el fondo blanco que sobreescribía el morado */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);

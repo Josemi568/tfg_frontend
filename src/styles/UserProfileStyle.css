@@ -1,146 +1,8 @@
-/* .contenedor-perfil {
-    max-width: 1400px;
-    margin: auto;
-    padding: clamp(20px, 4vw, 60px);
-}
-
-.contenedor-perfil.cargando,
-.contenedor-perfil.error {
-    text-align: center;
-    padding: 100px;
-}
-
-.tarjeta-perfil {
-    padding: clamp(20px, 5vw, 64px);
-    margin-bottom: clamp(30px, 6vw, 80px);
-    border: none;
-    background-color: #85f077 !important;
-    border-radius: 24px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-
-.nombre-usuario {
-    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
-    background: linear-gradient(to right, #7834C2, #a855f7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    line-height: 1.1;
-    word-break: break-word;
-    overflow-wrap: break-word;
-}
-
-.boton-seguir {
-    padding: 10px 24px;
-    border-radius: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 1rem;
-}
-
-.boton-seguir.siguiendo {
-    border: none;
-    background-color: #631fac !important;
-    color: white !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.boton-seguir.siguiendo:hover {
-    background-color: #a855f7 !important;
-}
-
-.boton-seguir.no-siguiendo {
-    border: none;
-    background: #7834C2;
-    color: white;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-}
-
-
-.boton-seguir.no-siguiendo:hover {
-    background: #a855f7;
-}
-
-.estadisticas-perfil {
-    background-color: #7834C2 !important;
-    border-radius: 24px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    border: none !important;
-}
-
-.valor-estadistica {
-    color: white !important;
-    transition: transform 0.3s ease;
-}
-
-.item-estadistica:hover .valor-estadistica {
-    transform: scale(1.1);
-}
-
-.etiqueta-estadistica {
-    letter-spacing: 2px;
-    color: white !important;
-}
-
-.separador-estadistica {
-    width: 1px;
-    background: rgba(255, 255, 255, 0.2) !important;
-}
-
-.titulo-seccion-publicaciones {
-    font-size: 2.25rem;
-    margin-bottom: 32px;
-    font-weight: 700;
-}
-
-.contenedor-vacio {
-    padding: 60px;
-}
-
-.mensaje-vacio {
-    color: #373d44;
-    font-size: 1.2rem;
-}
-
-.ls-1 {
-    letter-spacing: 1px;
-}
-
-/* Soporte para pantallas 4K / UHD */
-/* @media (min-width: 2500px) {
-    .contenedor-perfil {
-        max-width: 2000px;
-    }
-
-    .nombre-usuario {
-        font-size: 6rem !important;
-    }
-
-    .valor-estadistica {
-        font-size: 4rem !important;
-    }
-
-    .etiqueta-estadistica {
-        font-size: 1.5rem !important;
-    }
-
-    .boton-seguir {
-        padding: 20px 48px;
-        font-size: 1.5rem;
-    }
-}  */
-
 .contenedor-perfil {
     max-width: 1400px;
     margin: auto;
     padding: clamp(24px, 5vw, 80px);
     background-color: #fef7ff;
-    /* Fondo sutil general para coherencia */
     min-height: 100vh;
     font-family: 'Manrope', sans-serif;
 }
@@ -153,13 +15,11 @@
     font-weight: 700;
 }
 
-/* Tarjeta de Perfil - Cambiado de verde a un morado profesional vibrante */
 .tarjeta-perfil {
     padding: clamp(32px, 6vw, 80px);
     margin-bottom: clamp(40px, 8vw, 100px);
     border: none;
     background: #a271bb !important;
-    /* Morado Premium */
     border-radius: 32px;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -169,7 +29,6 @@
     overflow: hidden;
 }
 
-/* Efecto decorativo sutil en la tarjeta */
 .tarjeta-perfil::before {
     content: '';
     position: absolute;
@@ -184,7 +43,6 @@
 .nombre-usuario {
     font-size: clamp(1.5rem, 8vw, 3.5rem) !important;
     color: white !important;
-    /* Blanco sólido para legibilidad sobre el morado */
     background: none !important;
     -webkit-text-fill-color: initial !important;
     line-height: 1;
@@ -194,7 +52,6 @@
     word-break: break-word;
 }
 
-/* Botones de acción */
 .boton-seguir {
     padding: 12px 32px;
     border-radius: 16px;
@@ -231,7 +88,6 @@
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-/* Estadísticas - Estilo Cristal */
 .estadisticas-perfil {
     background-color: rgba(255, 255, 255, 0.1) !important;
     border-radius: 24px;
@@ -276,7 +132,6 @@
     align-self: center;
 }
 
-/* Sección de publicaciones */
 .titulo-seccion-publicaciones {
     font-size: 2.5rem;
     margin-bottom: 40px;
@@ -303,7 +158,6 @@
     letter-spacing: 0.025em;
 }
 
-/* Soporte para pantallas 4K / UHD */
 @media (min-width: 2500px) {
     .contenedor-perfil {
         max-width: 2200px;
