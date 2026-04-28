@@ -2,16 +2,27 @@
     background: #C0E892;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid #C0E892;
-    border-radius: 16px;
-    padding: clamp(16px, 4vw, 40px);
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    border: 1px solid rgba(76, 29, 149, 0.1);
+    border-radius: 24px;
+    padding: clamp(24px, 5vw, 48px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 2rem;
+}
+
+.tarjeta-publicacion-wrapper {
+    background-color: #f5f3ff;
+    border-radius: 24px;
+    padding: 20px;
 }
 
 .titulo-detalle {
-    font-size: clamp(1.5rem, 6vw, 3rem);
-    color: #1e293b;
-    line-height: 1.2;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #1a1c1e;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
 }
 
 .texto-baneado {
@@ -19,6 +30,11 @@
     font-size: 0.5em;
     vertical-align: middle;
     margin-left: 12px;
+    background: #C0E892;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 .boton-accion-ban {
@@ -27,128 +43,199 @@
 
 .contenedor-multimedia-detalle {
     border-radius: 20px;
-    background: #f1f5f9;
+    background: #C0E892;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 600px;
+}
+
+.contenedor-multimedia-detalle img {
+    max-width: 100%;
+    max-height: 600px;
+    display: block;
+    height: auto;
+    object-fit: contain;
 }
 
 .sin-multimedia {
     padding: clamp(40px, 10vw, 80px);
     text-align: center;
     color: #94a3b8;
+    background: #f1f5f9;
 }
 
 .info-pie-detalle {
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid rgba(76, 29, 149, 0.1);
+    padding-top: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .texto-autor {
-    font-size: 1.1rem;
-    color: #1e293b;
+    font-size: 1.125rem;
+    color: #4b5563;
 }
 
 .enlace-autor {
     font-weight: 700;
-    color: #8846CF;
+    color: #4c1d95;
     text-decoration: none;
-    transition: text-decoration 0.2s;
+    transition: color 0.2s;
 }
 
 .enlace-autor:hover {
+    color: #7c3aed;
     text-decoration: underline;
 }
 
 .fecha-publicacion {
-    font-size: 0.9rem;
-    color: #64748b;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    display: block;
+    margin-top: 4px;
 }
 
-/* movido a clases bs */
+.acciones-post {
+    display: flex;
+    gap: 12px;
+}
 
 .boton-reaccion {
-    color: #1e293b;
-    padding: 8px 16px;
+    color: #4b5563;
+    padding: 10px 20px;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 1rem;
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.875rem;
+    font-weight: 600;
+    background: white;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .boton-reaccion:hover {
-    background: #e2e8f0;
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
 }
 
 .boton-reaccion.like-activo {
-    background: #e2e8f0;
-    border: 2px solid #3b82f6;
-    font-weight: bold;
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #065f46;
 }
 
 .boton-reaccion.dislike-activo {
-    background: #e2e8f0;
-    border: 2px solid #ef4444;
-    font-weight: bold;
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #991b1b;
 }
 
 .descripcion-post {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #1b2027;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #374151;
+    margin: 2rem 0;
 }
 
 .separador-detalle {
-    margin: 40px 0;
+    margin: 48px 0;
     border: none;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid rgba(76, 29, 149, 0.1);
 }
 
 .seccion-comentarios {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .titulo-comentarios {
-    margin-bottom: 16px;
-    font-size: 1.5rem;
-    color: #1e293b;
+    margin-bottom: 24px;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #1a1c1e;
+    letter-spacing: -0.025em;
+}
+
+.formulario-comentario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
 }
 
 .entrada-comentario {
-    padding: 16px;
+    padding: 16px 20px;
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e5e7eb;
     outline: none;
     font-size: 1rem;
-    transition: border-color 0.2s;
+    transition: all 0.2s;
+    background: #f8fafc;
+    font-family: inherit;
 }
 
 .entrada-comentario:focus {
-    border-color: #a855f7;
+    border-color: #4c1d95;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(76, 29, 149, 0.1);
 }
 
 .boton-enviar-comentario {
-    padding: 16px 32px;
+    padding: 14px 28px;
     border-radius: 12px;
     font-size: 1rem;
-    font-weight: 600;
-    background-color: #864BC9;
+    font-weight: 700;
+    background-color: #4c1d95;
     color: white;
     border: none;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+    align-self: flex-end;
 }
 
 .boton-enviar-comentario:hover {
-    background-color: #a855f7;
+    background-color: #3a1671;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(76, 29, 149, 0.2);
+}
+
+.lista-comentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comentario-item {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
 }
 
 .error-comentario {
     color: #ef4444;
     margin-top: 12px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    background: #fef2f2;
+    padding: 8px 12px;
+    border-radius: 8px;
 }
 
 .exito-comentario {
     color: #10b981;
     margin-top: 12px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    background: #ecfdf5;
+    padding: 8px 12px;
+    border-radius: 8px;
 }

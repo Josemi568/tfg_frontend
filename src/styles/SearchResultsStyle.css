@@ -1,4 +1,4 @@
-.seccion-principal {
+/* .seccion-principal {
     margin-top: 20px;
 }
 
@@ -72,4 +72,104 @@
 .conteo-seguidores {
     font-size: 0.9rem;
     color: #131518;
+} */
+
+.seccion-principal {
+    margin-top: 40px;
+    padding: 0 20px;
+    font-family: 'Manrope', sans-serif;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titulo-resultados {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    color: #1a1c1e;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.subtitulo-resultados {
+    color: #6b7280;
+    margin-bottom: 32px;
+    font-size: 1.1rem;
+}
+
+.mensaje-error {
+    color: #ef4444;
+    font-size: 0.95rem;
+    margin-top: 12px;
+    font-weight: 600;
+    background: #fef2f2;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #fee2e2;
+}
+
+.lista-resultados-usuarios {
+    background: transparent !important;
+    padding: 0;
+    margin: 0;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Tarjeta de Usuario - Cambio de Verde a Morado Claro Profesional */
+.tarjeta-usuario {
+    margin-bottom: 0;
+    /* Controlado por el gap del contenedor */
+    background: #d7a2f1;
+    /* Violeta lavanda sutil y profesional */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(76, 29, 149, 0.1) !important;
+    border-radius: 20px;
+    padding: 28px 32px;
+    box-shadow: 0 4px 6px -1px rgba(76, 29, 149, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tarjeta-usuario:hover {
+    transform: translateY(-4px);
+    background: #e2bef4 !important;
+    /* Morado un poco más claro al pasar el ratón */
+    border-color: rgba(76, 29, 149, 0.3) !important;
+    box-shadow: 0 20px 25px -5px rgba(76, 29, 149, 0.15);
+}
+
+.nombre-usuario {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #4c1d95 !important;
+    /* Violeta Premium Artist */
+    letter-spacing: -0.01em;
+}
+
+.enlace-usuario {
+    text-decoration: none;
+    color: inherit;
+}
+
+.conteo-seguidores {
+    font-size: 0.95rem;
+    color: #4b5563;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Opcional: Si usas la clase efecto-cristal */
+.efecto-cristal {
+    /* Eliminado el fondo blanco que sobreescribía el morado */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
