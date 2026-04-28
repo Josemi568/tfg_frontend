@@ -1,4 +1,4 @@
-.contenedor-perfil {
+/* .contenedor-perfil {
     max-width: 1400px;
     margin: auto;
     padding: clamp(20px, 4vw, 60px);
@@ -112,7 +112,7 @@
 }
 
 /* Soporte para pantallas 4K / UHD */
-@media (min-width: 2500px) {
+/* @media (min-width: 2500px) {
     .contenedor-perfil {
         max-width: 2000px;
     }
@@ -133,4 +133,197 @@
         padding: 20px 48px;
         font-size: 1.5rem;
     }
+}  */
+
+.contenedor-perfil {
+    max-width: 1400px;
+    margin: auto;
+    padding: clamp(24px, 5vw, 80px);
+    background-color: #fef7ff;
+    /* Fondo sutil general para coherencia */
+    min-height: 100vh;
+    font-family: 'Manrope', sans-serif;
+}
+
+.contenedor-perfil.cargando,
+.contenedor-perfil.error {
+    text-align: center;
+    padding: 120px 20px;
+    color: #4c1d95;
+    font-weight: 700;
+}
+
+/* Tarjeta de Perfil - Cambiado de verde a un morado profesional vibrante */
+.tarjeta-perfil {
+    padding: clamp(32px, 6vw, 80px);
+    margin-bottom: clamp(40px, 8vw, 100px);
+    border: none;
+    background: #a271bb !important;
+    /* Morado Premium */
+    border-radius: 32px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(76, 29, 149, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto decorativo sutil en la tarjeta */
+.tarjeta-perfil::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.nombre-usuario {
+    font-size: clamp(1.5rem, 8vw, 3.5rem) !important;
+    color: white !important;
+    /* Blanco sólido para legibilidad sobre el morado */
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin-bottom: 2rem;
+    word-break: break-word;
+}
+
+/* Botones de acción */
+.boton-seguir {
+    padding: 12px 32px;
+    border-radius: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.boton-seguir.siguiendo {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    backdrop-filter: blur(4px);
+}
+
+.boton-seguir.siguiendo:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px);
+}
+
+.boton-seguir.no-siguiendo {
+    border: none;
+    background: white !important;
+    color: #4c1d95 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.boton-seguir.no-siguiendo:hover {
+    background: #f3e8ff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estadísticas - Estilo Cristal */
+.estadisticas-perfil {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 24px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 24px;
+    display: flex;
+    gap: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.item-estadistica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.valor-estadistica {
+    font-size: 1.75rem !important;
+    font-weight: 800;
+    color: white !important;
+    transition: transform 0.3s ease;
+}
+
+.item-estadistica:hover .valor-estadistica {
+    transform: scale(1.1);
+}
+
+.etiqueta-estadistica {
+    font-size: 0.75rem !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.separador-estadistica {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    align-self: center;
+}
+
+/* Sección de publicaciones */
+.titulo-seccion-publicaciones {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: 800;
+    color: #1a1c1e;
+    letter-spacing: -0.025em;
+}
+
+.contenedor-vacio {
+    padding: 80px 20px;
+    text-align: center;
+    background: white;
+    border-radius: 24px;
+    border: 2px dashed #e5e7eb;
+}
+
+.mensaje-vacio {
+    color: #6b7280;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.ls-1 {
+    letter-spacing: 0.025em;
+}
+
+/* Soporte para pantallas 4K / UHD */
+@media (min-width: 2500px) {
+    .contenedor-perfil {
+        max-width: 2200px;
+    }
+
+    .nombre-usuario {
+        font-size: 8rem !important;
+    }
+
+    .valor-estadistica {
+        font-size: 4rem !important;
+    }
+
+    .etiqueta-estadistica {
+        font-size: 1.5rem !important;
+    }
+
+    .boton-seguir {
+        padding: 24px 64px;
+        font-size: 1.75rem;
+    }
+
 }
