@@ -1,50 +1,110 @@
-.dashboard-acciones {
-  margin-bottom: 32px;
-  display: flex;
-  justify-content: flex-start;
+.dashboard-container {
+  padding: 2rem;
+  background-color: #fef7ff;
+  /* Fondo sutil para resaltar el contenido */
+  min-height: 100vh;
+  font-family: 'Manrope', sans-serif;
 }
 
-.dashboard-crear-link {
-  text-decoration: none;
-}
-
-.dashboard-boton-crear {
-  padding: 16px 32px;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
-  background: linear-gradient(135deg, #5BCC3D, #AD3DCC);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.dashboard-boton-crear:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 20px -5px rgba(99, 102, 241, 0.4);
-}
-
-.dashboard-carta-bienvenida {
-  background-color: #9E46BD !important;
-  border-color: #9E46BD !important;
-  margin-bottom: 48px;
-  box-shadow: 0 10px 25px -3px rgba(6, 6, 7, 0.041) !important;
-}
-
-.dashboard-carta-bienvenida.centered {
-  text-align: center;
-}
-
-.dashboard-titulo-bienvenida {
-  color: black !important;
-  margin-top: 0;
-}
-
-.dashboard-texto-bienvenida {
+/* Botón de acción principal "Crear publicación" */
+.boton-crear-publicacion {
+  background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%) !important;
   color: white !important;
-  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 6px -1px rgba(76, 29, 149, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.boton-crear-publicacion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(76, 29, 149, 0.3);
+  filter: brightness(1.1);
+}
+
+/* Banner de Bienvenida (Hola, Josemi / Bienvenido a Plazart) */
+.banner-bienvenida {
+  background: linear-gradient(135deg, #4c1d95 0%, #a855f7 100%) !important;
+  padding: 3rem 2rem;
+  border-radius: 24px;
+  color: white;
+  margin-bottom: 3rem;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(76, 29, 149, 0.1);
+}
+
+@media (min-width: 768px) {
+  .banner-bienvenida {
+    text-align: left;
+    padding: 4rem 3rem;
+  }
+}
+
+.banner-bienvenida h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.025em;
+}
+
+.banner-bienvenida p {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Sección de títulos de contenido */
+.seccion-titulo {
+  margin-bottom: 2rem;
+}
+
+.seccion-titulo h2 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #1a1c1e;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
+}
+
+.seccion-titulo p {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Grid de publicaciones (Dashboard) */
+.grid-publicaciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Estilo para cuando no hay sesión (Home pública) */
+.home-publica {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+/* Ajustes Responsive */
+@media (max-width: 576px) {
+  .banner-bienvenida h1 {
+    font-size: 1.75rem;
+  }
+
+  .dashboard-container {
+    padding: 1rem;
+  }
 }
