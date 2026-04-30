@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import PostCard from '../components/PostCard';
+import httpClient from '../services/httpClient';
 import '../styles/SearchResultsStyle.css';
 
 const SearchResults = () => {
@@ -25,19 +26,11 @@ const SearchResults = () => {
       setError(null);
 
       try {
-        const response = await fetch('http://localhost:8000/api/search', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ type, query: query.trim() }),
-        });
+        const response = await httpClient.post('/search', { type, query: query.trim() });
 
-        const data = await response.json();
-        if (response.ok) {
-          setResults(data);
+        if (response.data) {
+          setResults(response.data);
         } else {
-          console.error('Search error:', data);
           setError('Error al buscar. Inténtalo de nuevo.');
           setResults([]);
         }

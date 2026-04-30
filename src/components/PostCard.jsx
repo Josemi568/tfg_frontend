@@ -9,7 +9,7 @@ import '../styles/PostCardStyle.css';
  * información de una publicación.
  */
 const PostCard = ({ post }) => {
-  const BACKEND_URL = 'http://localhost:8000';
+  const BACKEND_URL = import.meta.env.PROD ? '' : 'http://localhost:8000';
   const isAdmin = isAdminUser();
   const navigate = useNavigate();
 

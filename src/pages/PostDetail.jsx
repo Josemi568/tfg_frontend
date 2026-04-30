@@ -27,7 +27,7 @@ const PostDetail = () => {
   const [dislikes, setDislikes] = useState(0);
   const [userAction, setUserAction] = useState('none');
 
-  const BACKEND_URL = 'http://localhost:8000';
+  const BACKEND_URL = import.meta.env.PROD ? '' : 'http://localhost:8000';
   const isAdmin = isAdminUser();
 
   const handleBanToggle = async () => {
@@ -151,7 +151,7 @@ const PostDetail = () => {
       setError(null);
       const fetchPost = async () => {
         try {
-          const response = await httpClient.get('http://localhost:8000/post/api/allPosts');
+          const response = await httpClient.get('/post/api/allPosts');
           const foundPost = response.data.find(p => p.id.toString() === id);
           if (foundPost) {
             setPost(foundPost);
